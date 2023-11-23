@@ -1,10 +1,117 @@
-.App {
-  text-align: center;
+*{
+  margin: 0;
+  padding: 0;
+  background-color: #FDF6E5;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* HELPER CLASSES */
+/* FLEX */
+.flex-col{
+  display: flex;
+  flex-direction: column;
+
+}
+
+/* CONTAINER */
+.full-width-container{
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  align-items: center; 
+  height: 50vh; 
+}
+
+/* NO BACKGROUND */
+.no-background{
+  background: none;
+}
+/* NAVBAR */
+.Navbar{
+  display: flex;
+  padding: 30px 0;
+  margin-left: 10%;
+  font-size: 40px;
+}
+
+/* LOGIN & SIGNUP */
+#LogIn{
+  background: none;
+  padding-bottom: 5px;
+}
+.LogIn{
+  display: flex;
+  justify-content: center;
+  width: 300px;
+  text-align: center;
+  padding: 20px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  border-radius: 8px; 
+  background: white; 
+}
+
+.LogIn input {
+  margin-bottom: 15px; 
+  padding: 12px; 
+  border: 1px solid #ddd; 
+  border-radius: 4px; 
+  font-size: 15px;
+}
+
+.LogIn input:focus {
+  outline: none;
+  border-color: #4A90E2; 
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.divider-line {
+  flex: 1;
+  border: none;
+  border-top: 1px solid #000;
+  margin: 0 10px;
+}
+
+.divider-text {
+  padding: 0 10px;
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  margin-top: 10px; /* Adjust as needed */
+  border: none;
+  border-radius: 20px;
+  background-color: #4285F4;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px; /* Adjust as needed */
+}
+
+.google-icon {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.signup-prompt {
+  margin-top: 20px;
+  font-size: 14px; /* Adjust as needed */
+}
+
+.signup-link {
+  color: #4285F4;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
 }
 
 @media (prefers-reduced-motion: no-preference) {
