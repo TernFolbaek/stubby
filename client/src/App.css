@@ -55,6 +55,7 @@
   border: 1px solid #ddd; 
   border-radius: 4px; 
   font-size: 15px;
+  background-color: #F2E3FE;
 }
 
 .LogIn input:focus {
@@ -84,19 +85,21 @@
   align-items: center;
   justify-content: center;
   padding: 10px 20px;
-  margin-top: 10px; /* Adjust as needed */
+  margin-top: 10px; 
+  margin-right: 20px;
   border: none;
   border-radius: 20px;
   background-color: #4285F4;
   color: white;
   font-weight: bold;
   cursor: pointer;
-  font-size: 16px; /* Adjust as needed */
+  font-size: 16px; 
 }
 
 .google-icon {
-  width: 20px;
-  margin-right: 10px;
+  width: 30px;
+  margin-right: 25px;
+  border-radius: 50%;
 }
 
 .signup-prompt {
