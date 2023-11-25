@@ -1,31 +1,58 @@
+import React, { useState } from 'react';
 import '../App.css';
-import googleIcon from '../images/google.png'
-
+import googleIcon from '../images/google.png';
+import axios from 'axios';
+import { useLocation } from 'wouter';
 
 const LogIn = () => {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
+  const [, navigate] = useLocation();
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('/api/users/login', formData);
+      localStorage.setItem('authToken', response.data.token);
+      navigate('/home'); // Navigate to home page after successful login
+    } catch (error) {
+      console.error('Login error', error.response);
+    }
+  };
+
   return (
     <div className="full-width-container">
-      <div className="LogIn flex-col">
+      <form className="LogIn flex-col" onSubmit={handleSubmit}>
         <h1 id='LogIn'>Log In</h1>
-        <input type="text" name="username" id="username" placeholder="Username" />
-        <input type="password" name="password" id="password" placeholder="Password" />
+        <input type="text" name="username" id="username" placeholder="Username" value={formData.username} onChange={handleInputChange} />
+        <input type="password" name="password" id="password" placeholder="Password" value={formData.password} onChange={handleInputChange} />
 
-          <div className="divider no-background">
-              <hr className="divider-line" />
-              <span className="divider-text no-background">or</span>
-              <hr className="divider-line" />
-            </div>
-          
-            <button className="google-btn">
-              <img src={googleIcon} alt="Google" className="google-icon" />
-              Continue with Google
-            </button>
-            <div className="signup-prompt no-background">
-              New to stubby? <a href="/signUp" className="signup-link no-background">sign up</a>
-            </div>
-    </div>
+        <button type="submit" className="google-btn">Log In</button>
+
+        <div className="divider no-background">
+          <hr className="divider-line" />
+          <span className="divider-text no-background">or</span>
+          <hr className="divider-line" />
+        </div>
+
+        <button className="google-btn">
+          <img src={googleIcon} alt="Google" className="google-icon" />
+          Continue with Google
+        </button>
+
+        <div className="signup-prompt no-background">
+          New to stubby? <a href="/signUp" className="signup-link no-background">sign up</a>
+        </div>
+      </form>
     </div>
   );
-}
+};
 
 export default LogIn;

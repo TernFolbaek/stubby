@@ -7,6 +7,14 @@
   background-color: #FDF6E5;
 }
 
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; 
+}
+
+
+
 /* HELPER CLASSES */
 /* FLEX */
 .flex-col{
@@ -17,6 +25,7 @@
 
 
 
+
 /* CONTAINER */
 .full-width-container{
   display: flex;
@@ -24,6 +33,21 @@
   width: 100vw;
   align-items: center; 
   height: 50vh; 
+}
+
+/* SIDE ALIGNED DIVS */
+.right-aligned-div {
+  width: 50%;
+  margin-left: auto;
+  margin-right: 0;
+  text-align: right;
+}
+
+.left-aligned-div {
+  width: 30%;
+  margin-right: auto;
+  margin-left: 0;
+  text-align: left;
 }
 
 /* NO BACKGROUND */
@@ -37,6 +61,15 @@
   margin-left: 10%;
   font-size: 40px;
 }
+
+/* HOME */
+.background-hero {
+  background-image: url('./images/home.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
 
 /* LOGIN & SIGNUP */
 #LogIn{
