@@ -4,34 +4,67 @@
 *{
   margin: 0;
   padding: 0;
-  background-color: #FDF6E5;
+  background-color: rgb(240,232,220)
+
+  ;
 }
 
 body, html {
   margin: 0;
   padding: 0;
-  overflow: hidden; 
+}
+a{
+  text-decoration: none;
+  color: inherit;
 }
 
 
 
+
+
+
+/* ANIMATIONS */
+.blinker {
+  display: inline-block;
+  vertical-align: relative;
+  height: 20px;
+  width: 2px;
+  background-color: black;
+  animation: blink-animation 1s step-start infinite;
+}
+
+@keyframes blink-animation {
+  50% {
+    background-color: transparent;
+  }
+}
+
 /* HELPER CLASSES */
-/* FLEX */
+
+.button-container{
+  display: flex;
+  gap: 10%;
+}
+
+.button-signup, .button-login{
+  border: 2px solid rgba(0,50,200,0.5);
+}
 .flex-col{
   display: flex;
   flex-direction: column;
 
 }
 
-
-
+.link{
+  color: blue;
+}
 
 /* CONTAINER */
 .full-width-container{
   display: flex;
   justify-content: center;
   width: 100vw;
-  align-items: center; 
+
   height: 50vh; 
 }
 
@@ -41,6 +74,7 @@ body, html {
   margin-left: auto;
   margin-right: 0;
   text-align: right;
+  background: none;
 }
 
 .left-aligned-div {
@@ -54,6 +88,8 @@ body, html {
 .no-background{
   background: none;
 }
+/* ------------------------------------------------------------------------------------ */
+
 /* NAVBAR */
 .Navbar{
   display: flex;
@@ -160,32 +196,21 @@ body, html {
   text-decoration: underline;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* PROFILE INFORMATION */
+
+.profile-info-container{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.left-half {
+  width: 100%;
+  float: left;
+  padding-right: 15px; /* or any spacing you want between the columns */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.right-half {
+  width: 50%;
+  float: right;
+  padding-left: 15px; /* or any spacing you want between the columns */
 }

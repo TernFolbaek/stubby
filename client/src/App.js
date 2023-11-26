@@ -4,23 +4,31 @@ import Navbar from './navbar/logInNavbar';
 import LogIn from './login/logIn';
 import SignUp from './login/signUp';
 import Home from './home/home';
-import { Route, Switch, useLocation } from 'wouter';
+import { Route, Switch } from 'wouter';
 import ProtectedRoute from './protected/protectedRoutes';
+import SignUpForm from './signUpForm/signUpController';
 
 const App = () => {
-  const [location] = useLocation();
-
   return (
     <div className="App">
-      {(location === '/login' || location === '/signup') && <Navbar />}
       <Switch>
-        <Route path='/' component={Home}/>
-        <Route path="/login" component={LogIn} />
-        <Route path="/signup" component={SignUp} />
+        <Route path='/'>
+          <Home />
+        </Route>
+        <Route path="/login">
+          <Navbar />
+          <LogIn />
+        </Route>
+        <Route path="/signup">
+          <Navbar />
+          <SignUp />
+        </Route>
+        <Route path='/profile-info'>
+          <Navbar />
+          <SignUpForm/> 
+        </Route>
 
-        <ProtectedRoute>
-
-        </ProtectedRoute>
+        <ProtectedRoute path="/protected" />
       </Switch>
     </div>
   );

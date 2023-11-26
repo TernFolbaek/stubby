@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../App.css';
 import googleIcon from '../images/google.png';
 import axios from 'axios';
-import { useLocation } from 'wouter';
+import { Link, useLocation } from 'wouter';
 
 const LogIn = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ const LogIn = () => {
     try {
       const response = await axios.post('/api/users/login', formData);
       localStorage.setItem('authToken', response.data.token);
-      navigate('/home'); // Navigate to home page after successful login
+      navigate('/profile-info'); 
     } catch (error) {
       console.error('Login error', error.response);
     }
@@ -48,7 +48,7 @@ const LogIn = () => {
         </button>
 
         <div className="signup-prompt no-background">
-          New to stubby? <a href="/signUp" className="signup-link no-background">sign up</a>
+          New to stubby? <Link href="/signup" className="signup-link no-background">sign up</Link>
         </div>
       </form>
     </div>

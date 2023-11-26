@@ -13,9 +13,10 @@ const SignUp = () => {
   });
 
   const [, navigate] = useLocation();
+  
   const handleOutsideClick = (e) => {
     if (e.target.id === 'modal-backdrop') {
-      navigate('/'); // Navigate back to the default (login) page
+      navigate('/');
     }
   };
 
