@@ -34,32 +34,36 @@ const userSignUp = async (req, res) => {
 
 
 const userLogIn = async (req, res) => {
-  console.log("in log in")
   try {
     const { username, password } = req.body;
-
+    console.log(`Logging in user: ${username}`);
 
     const user = await User.findOne({ username });
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
+    console.log(`Found user: ${username}`);
+    console.log(`Database password: ${user.password}`);
+    console.log(`Provided password: ${password}`);
 
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log(`Password match: ${isMatch}`);
+
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-
     const payload = { userId: user._id };
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '3h' });
 
-    res.json({ message: 'Logged in successfully', token });
+    res.json({ message: 'Logged in successfully', token, userId: user._id });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
   }
 };
+
 
 module.exports = {
   userSignUp,

@@ -6,11 +6,11 @@ const Step1 = ({ setFormData, formData }) => {
   };
 
   return (
-    <div className='form-container text-mono text-[25px]'>
-      <div className='left-half w-full md:w-2/5 px-2 mb-6 flex-col'>
+    <div className='form-container text-mono text-[25px] bg-dark'>
+      <div className='left-half w-full md:w-2/5 px-2 mb-6 flex-col bg-dark'>
         {/* First Name */}
-        <div className="name">
-          <div className='input-field flex-1'>
+        <div className="name ">
+          <div className='input-field flex-1 bg-dark'>
             <label htmlFor='firstName'>First Name</label>
             <input
               className='step1-input'
@@ -25,7 +25,7 @@ const Step1 = ({ setFormData, formData }) => {
             />
           </div>
           {/* Last Name */}
-          <div className='input-field flex-1'>
+          <div className='input-field flex-1 '>
             <label htmlFor='lastName'>Last Name</label>
             <input
               className='step1-input'

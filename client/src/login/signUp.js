@@ -46,6 +46,8 @@ const SignUp = () => {
       });
 
       localStorage.setItem('authToken', response.data.token);
+      navigate('/logIn');
+
     } catch (error) {
       console.error('An error occurred during sign-up', error.response);
     }
@@ -54,7 +56,7 @@ const SignUp = () => {
   return (
     <div
       id='modal-backdrop'
-      className='fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50 '
+      className='fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50 h-screen text-black'
     >
       <form
         className='LogIn flex-col'
@@ -106,7 +108,7 @@ const SignUp = () => {
 
         <div className='divider no-background'>
           <hr className='divider-line' />
-          <span className='divider-text no-background'>or</span>
+          <span className='divider-text no-background text-black'>or</span>
           <hr className='divider-line' />
         </div>
 

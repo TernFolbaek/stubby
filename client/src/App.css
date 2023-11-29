@@ -4,9 +4,8 @@
 *{
   margin: 0;
   padding: 0;
-  background-color: rgb(240,232,220)
-
-  ;
+  background-color: rgb(25,26,31);
+  overflow-y: hidden;
 }
 
 body, html {
@@ -59,9 +58,17 @@ a{
   display: flex;
   justify-content: center;
   width: 100vw;
-
-  height: 50vh; 
+  background-color: rgb(25,26,31);
+  align-items: start;
+  margin-top: 30px;
+  height: 100vh; 
 }
+
+.bg-dark{
+  background-color: rgb(25,26,31);
+
+}
+
 
 /* SIDE ALIGNED DIVS */
 .right-aligned-div {
@@ -91,6 +98,17 @@ a{
   padding: 30px 0;
   margin-left: 10%;
   font-size: 40px;
+  background-color: rgb(25,26,31);
+}
+
+.Navbar h1{
+  background-color: rgb(25,26,31);
+  color: white;
+}
+
+.App{
+  background-color: rgb(25,26,31);
+
 }
 
 /* HOME */
@@ -200,6 +218,12 @@ a{
   text-align: center;
 }
 
+.form-container label, div{
+  background-color: rgb(25,26,31);
+  color: white;
+
+}
+
 .custom-hr{
   width: 100vw;
   border: 1.5px solid lightgray;
@@ -237,6 +261,8 @@ a{
   border: 2px solid rgba(192, 132, 252, 0.5); /* 0.5 opacity */
   border-radius: 8px;
   background-color: #F2E3FE;
+  font-size: 15px;
+  font-family: monospace;
 }
 
 select.step1-input{
@@ -246,13 +272,18 @@ select.step1-input{
 
 .step1-input:focus {
   outline: none;
+  background-color: rgb(205, 173, 237);
 }
+
 
 .next-back{
   display: flex;
   justify-content: center;
+  align-items: start;
+  margin-top: 10px;
   width: 100%;
   padding: 20px;
+  height: 100vh;
 }
 .step1{
   background-color: white;
@@ -268,30 +299,30 @@ select.step1-input{
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
+  flex: 0.6;
 }
 
 .selected-subjects {
   margin-bottom: 20px;
-  flex: 0.5;
+  margin-right: 20px;
+  flex: 0.4;
+  padding: 10px;
 }
 .select-topics-text{
   width: 70%;
   text-align: center;
+  font-family: monospace;
 }
 
-.subject-tag {
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  border: 1px solid #ddd;
-  background-color: white;
-  text-align: center;
-  transition: background-color 0.5s ease, color 0.5s ease;
-}
+.custom-subject-input input{
+  background-color: #F2E3FE;
+  color: black;
+  outline: none;
+  padding: 5px;
+  margin: 5px;
+  font-size: 20px;
+  font-family: monospace;
 
-.subject-tag:hover {
-  background-color: #ee7784;
 }
 
 .picks{
@@ -300,12 +331,7 @@ select.step1-input{
   flex-direction: column;
   gap: 20px;
 }
-.subject-tag button {
-  margin-left: 10px;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
+
 
 .predefined-subjects {
   display: grid;
@@ -314,6 +340,7 @@ select.step1-input{
   width: 100%;
   max-width: 600px; 
   margin: 0 auto; 
+  padding: 10px;
   
 }
 
@@ -325,21 +352,33 @@ select.step1-input{
   max-width: 600px; 
   margin: 0 auto; 
   height: fit-content;
+  
 }
 
-.subject-button {
+.subject-button, .subject-tag {
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
   border: 1px solid #ddd; 
-  background-color: white;
   text-align: center;
-  transition: background-color 0.5s ease, color 0.5s ease;
+  font-family: monospace;
+  font-size: 15px;
+  border: 1px solid white;
+  color: white;
+  transition: background-color 0.5s ease-out;
 }
 
-.subject-button:hover {
-  background-color: #F2E3FE;
+.subject-tag{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 150%;
+}
+
+.subject-button:hover, .subject-tag:hover {
+  background-color: rgb(225, 82, 82);
   transform: scale(1.1); 
+  color: white;
 }
 
 .custom-subject-input {
@@ -351,4 +390,44 @@ select.step1-input{
   border-radius: 5px;
   border: 1px solid #ddd;
 }
+
+/* STEP 3 */
+.step-3-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+  
+}
+
+.step-3-container h4{
+  color: rgb(183, 135, 245);
+  font-weight: bold;
+
+}
+.description-textarea {
+  width: 80%; 
+  height: 150px; 
+  resize: none; 
+  background-color: white;
+  border: none;
+  border-radius: 8px; 
+  padding: 15px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  font-size: 16px;
+  margin-bottom: 10px; 
+}
+
+.description-textarea:focus {
+  outline: none; 
+}
+
+.character-count {
+  align-self: flex-end; 
+  margin-right: 10%; 
+  font-size: 14px;
+  color: rgb(183, 135, 245);
+}
+
 

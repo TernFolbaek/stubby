@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-
-
 const UserSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
@@ -13,19 +11,13 @@ const UserSchema = new mongoose.Schema({
   age: { type: Number, required: false },
   school: { type: String, required: false },
   interests: [{ type: String }], 
-  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], 
-  matches: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] 
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  matches: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  description: { type: String, required: false, maxlength: 300 }, 
+  hasProfile: { type: Boolean, default: false } 
 });
 
 
-
-UserSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) {
-    return next();
-  }
-  this.password = await bcrypt.hash(this.password, 8);
-  next();
-});
 
 const User = mongoose.model('User', UserSchema);
 

@@ -23,12 +23,12 @@ const Step2 = ({ setFormData, formData }) => {
 
   const handleSubjectSelect = (subject) => {
     if (
-      !formData.subjects.includes(subject) &&
-      formData.subjects.length < maxSubjects
+      !formData.interests.includes(subject) &&
+      formData.interests.length < maxSubjects
     ) {
       setFormData({
         ...formData,
-        subjects: [...formData.subjects, subject],
+        interests: [...formData.interests, subject],
       });
     }
   };
@@ -43,7 +43,7 @@ const Step2 = ({ setFormData, formData }) => {
   const removeSubject = (subjectToRemove) => {
     setFormData({
       ...formData,
-      subjects: formData.subjects.filter(
+      interests: formData.interests.filter(
         (subject) => subject !== subjectToRemove
       ),
     });
@@ -55,7 +55,7 @@ const Step2 = ({ setFormData, formData }) => {
         <div className='selected-topics-count'></div>
         <h4 className='select-topics-text'>
           Select a minimum of 3 topics of interest to show other users which
-          areas you burn for
+          areas you burn for:
         </h4>
         <div className='custom-subject-input'>
           <input
@@ -71,7 +71,7 @@ const Step2 = ({ setFormData, formData }) => {
             <div
               key={index}
               onClick={() => handleSubjectSelect(subject)}
-              className='subject-button'
+              className='subject-button text-mono text-black' 
             >
               {subject}
             </div>
@@ -80,11 +80,12 @@ const Step2 = ({ setFormData, formData }) => {
       </div>
 
       <div className='picks'>
-        <h1>
-          Selected Topics ({formData.subjects.length}/{maxSubjects}):
+        <h1 className='text-center'>
+          Selected Topics ({formData.interests.length}/{maxSubjects}):
         </h1>
+        <h4 className='text-center'>click to remove</h4>
         <div className='selected-subjects'>
-          {formData.subjects.map((subject, index) => (
+          {formData.interests.map((subject, index) => (
             <div key={index} className='subject-tag' onClick={() => removeSubject(subject)}>
               {subject}
             </div>

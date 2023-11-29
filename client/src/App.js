@@ -6,7 +6,7 @@ import SignUp from './login/signUp';
 import Home from './home/home';
 import { Route, Switch } from 'wouter';
 import ProtectedRoute from './protected/protectedRoutes';
-import SignUpForm from './signUpForm/signUpController';
+import SignUpForm from './signUpForm/signUpForm';
 
 const App = () => {
   return (
