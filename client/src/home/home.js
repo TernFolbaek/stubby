@@ -30,14 +30,14 @@ const Home = () => {
         <div className='mt-8 no-background button-container right-aligned-div'>
         <Link
             to='/signUp'
-            className='button-signup hover:bg-transparent hover:text-blue-500 bg-blue-500 text-white font-bold py-2 px-10 border rounded-full mr-4 text-[17px] cursor-pointer transition duration-500'
+            className='button-signup hover:bg-transparent hover:text-purple-400 bg-purple-400 text-white font-bold py-2 px-10 border rounded-full mr-4 text-[17px] cursor-pointer transition duration-500'
           >
             Sign Up
           </Link>
 
           <Link 
             to='/logIn' 
-            className='button-login hover:bg-blue-500 hover:text-white bg-transparent text-blue-500 font-semibold py-2 px-10 border border-blue-500 rounded-full text-[17px] cursor-pointer transition duration-500'
+            className='button-login hover:bg-purple-400 hover:text-white bg-transparent text-purple-400 font-semibold py-2 px-10 border border-purple-400 rounded-full text-[17px] cursor-pointer transition duration-500'
           >
             Log In
           </Link>

@@ -1,6 +1,7 @@
 // SignUpForm.js (Controller Component with Tailwind CSS)
 import React, { useState } from 'react';
 import Step1 from './step1';
+import Step2 from './Step2';
 
 const SignUpForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -13,10 +14,16 @@ const SignUpForm = () => {
     linkedin: '',
     position: '',
     birthday: '',
+    subjects: [],
   });
 
   const handleNextStep = () => {
+    if (currentStep === 2 && formData.subjects.length < 3) {
+      alert('Please select at least 3 topics of interest.'); 
+      return; 
+    }
     setCurrentStep((prevStep) => prevStep + 1);
+    
   };
 
   const handlePreviousStep = () => {
@@ -32,40 +39,46 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen justify-between">
+    <div>
+      <div className='custom-hr' />
       <div>
         {currentStep === 1 && (
           <Step1 setFormData={handleFormDataChange} formData={formData} />
         )}
-        {/* You can include Step2 and Step3 components here as well */}
+        {currentStep === 2 && (
+          <Step2 setFormData={handleFormDataChange} formData={formData} />
+        )}
       </div>
 
       {/* Render navigation buttons and form controls */}
-      <div className='w-full px-4 py-3 bg-gray-100 border-t fixed inset-x-0 bottom-0 flex justify-between no-background'>
-        {currentStep > 1 && (
-          <button
-            onClick={handlePreviousStep}
-            className='px-4 py-2 text-sm text-gray-700 bg-white rounded shadow-sm hover:bg-gray-50 cursor-pointer border-none'
-          >
-            Back
-          </button>
-        )}
-        {currentStep < 3 && (
-          <button
-            onClick={handleNextStep}
-            className='px-4 py-2 text-sm text-white bg-blue-600 rounded shadow-sm hover:bg-blue-700 cursor-pointer'
-          >
-            Next
-          </button>
-        )}
-        {currentStep === 3 && (
-          <button
-            onClick={handleSubmit}
-            className='px-4 py-2 text-sm text-white bg-green-600 rounded shadow-sm hover:bg-green-700'
-          >
-            Submit
-          </button>
-        )}
+      <div className=''>
+        <div className='next-back'>
+          {currentStep > 1 && (
+            <button
+              onClick={handlePreviousStep}
+              className='button-login hover:bg-purple-400 hover:text-white bg-transparent text-purple-400 font-semibold py-2 px-10 border border-purple-400 rounded-full text-[17px] cursor-pointer transition duration-500'
+            >
+              Back
+            </button>
+          )}
+          {currentStep < 3 && (
+            <button
+              onClick={handleNextStep}
+              className='button-login hover:bg-purple-400 hover:text-white bg-transparent text-purple-400 font-semibold py-2 px-10 border border-purple-400 rounded-full text-[17px] cursor-pointer transition duration-500'
+            >
+              Next
+            </button>
+          )}
+
+          {currentStep === 3 && (
+            <button
+              onClick={handleSubmit}
+              className='button-login hover:bg-purple-400 hover:text-white bg-transparent text-purple-400 font-semibold py-2 px-10 border border-purple-400 rounded-full text-[17px] cursor-pointer transition duration-500'
+            >
+              Submit
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
