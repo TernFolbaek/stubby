@@ -21,11 +21,11 @@ const userSignUp = async (req, res) => {
     await user.save();
 
 
-    const payload = { userId: user._id };
+    const payload = { userId: user._id, hasProfile: user.hasProfile };
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '3h' });
 
     console.log(token)
-    res.status(201).json({ message: 'User created successfully', token });
+    res.status(201).json({ message: 'User created successfully', token});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
@@ -43,12 +43,9 @@ const userLogIn = async (req, res) => {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    console.log(`Found user: ${username}`);
-    console.log(`Database password: ${user.password}`);
-    console.log(`Provided password: ${password}`);
 
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log(`Password match: ${isMatch}`);
+
 
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });

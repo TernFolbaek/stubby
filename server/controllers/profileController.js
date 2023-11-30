@@ -4,19 +4,11 @@ const updateUserProfile = async (req, res) => {
   console.log('in profile backend')
   try {
     const { userId, firstName, lastName, institution, location, gender, linkedin, position, birthday, interests, description } = req.body;
-
-
-
     let user = await User.findById(userId);
-
-    console.log(user)
-
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-
-
 
     user.firstName = firstName;
     user.lastName = lastName;
@@ -32,8 +24,6 @@ const updateUserProfile = async (req, res) => {
 
     await user.save();
 
-
-
     res.status(200).json({ message: 'User profile updated successfully' });
   } catch (error) {
     console.error(error);
@@ -41,6 +31,18 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
+const fetchUserPortfolio = async (req, res) => {
+  try{
+    const {userId} = req.body
+    let user = await User.findById(userId)
+  } catch{
+    
+  }
+ 
+
+}
+
 module.exports = {
   updateUserProfile,
+  fetchUserPortfolio
 };

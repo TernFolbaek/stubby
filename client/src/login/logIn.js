@@ -22,6 +22,12 @@ const LogIn = () => {
       const response = await axios.post('/api/users/login', formData);
       localStorage.setItem('authToken', response.data.token);
       localStorage.setItem('userId', response.data.userId)
+      console.log('here')
+      let hasProfile = response.data.hasProfile
+      console.log(hasProfile)
+      if(hasProfile){
+        navigate('/explore-home')
+      }
       navigate('/profile-info'); 
     } catch (error) {
       console.error('Login error', error.response);

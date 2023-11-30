@@ -20,23 +20,6 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 app.use('/api/users', userRoutes);
 app.use('/api/profile', profileRoutes);
 
-const bcrypt = require('bcryptjs');
-
-async function testBcrypt() {
-  try {
-    const password = 'testPassword123'; // Replace with your test password
-    const hashedPassword = await bcrypt.hash(password, 10); // Hashing the password
-
-    console.log('Hashed Password:', hashedPassword);
-
-    const isMatch = await bcrypt.compare(password, hashedPassword); // Comparing the password
-    console.log('Password Match:', isMatch);
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
-
-testBcrypt();
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

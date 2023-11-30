@@ -6,6 +6,7 @@
   padding: 0;
   background-color: rgb(25,26,31);
   overflow-y: hidden;
+  
 }
 
 body, html {
@@ -32,6 +33,9 @@ a{
     background-color: transparent;
   }
 }
+
+
+
 
 /* HELPER CLASSES */
 
@@ -97,13 +101,10 @@ a{
   display: flex;
   padding: 30px 0;
   margin-left: 10%;
-  font-size: 40px;
-  background-color: rgb(25,26,31);
 }
 
 .Navbar h1{
-  background-color: rgb(25,26,31);
-  color: white;
+  font-size: 80px;
 }
 
 .App{
@@ -315,7 +316,7 @@ select.step1-input{
 }
 
 .custom-subject-input input{
-  background-color: #F2E3FE;
+  background-color: white;
   color: black;
   outline: none;
   padding: 5px;
@@ -376,19 +377,26 @@ select.step1-input{
 }
 
 .subject-button:hover, .subject-tag:hover {
-  background-color: rgb(225, 82, 82);
+  background-color: white;
   transform: scale(1.1); 
-  color: white;
+  color: black;
+}
+
+.subject-tag:hover{
+  background-color: rgb(225, 82, 82);
+
 }
 
 .custom-subject-input {
   margin-top: 20px; 
+
 }
 
 .custom-subject-textbox {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ddd;
+  background-color: white;
 }
 
 /* STEP 3 */

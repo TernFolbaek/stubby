@@ -62,7 +62,8 @@ const Step2 = ({ setFormData, formData }) => {
             type='text'
             placeholder='Add Custom Subject'
             onKeyDown={handleCustomSubject}
-            className='custom-subject-textbox'
+            className='custom-subject-textbox '
+            
           />
         </div>
 
