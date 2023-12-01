@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../App.css';
 import googleIcon from '../images/google.png';
 import axios from 'axios';
-import { useLocation,  } from 'wouter';
+import { useLocation } from 'wouter';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +13,7 @@ const SignUp = () => {
   });
 
   const [, navigate] = useLocation();
-  
+
   const handleOutsideClick = (e) => {
     if (e.target.id === 'modal-backdrop') {
       navigate('/');
@@ -47,7 +47,6 @@ const SignUp = () => {
 
       localStorage.setItem('authToken', response.data.token);
       navigate('/logIn');
-
     } catch (error) {
       console.error('An error occurred during sign-up', error.response);
     }
@@ -56,12 +55,21 @@ const SignUp = () => {
   return (
     <div
       id='modal-backdrop'
-      className='fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50 h-screen text-black'
+      className='full-width-container background-hero-dark min-h-screen bg-no-repeat bg-cover bg-center text-black'
     >
+      <h1
+        className='h1-stubby cursor-pointer'
+        onClick={() => {
+          console.log('Heading clicked, navigating to /explore-home');
+          navigate('/');
+        }}
+      >
+        Stubby
+      </h1>
       <form
         className='LogIn flex-col'
         onSubmit={handleSubmit}
-        onClick={(e) => e.stopPropagation()} 
+        onClick={(e) => e.stopPropagation()}
       >
         <h1 id='SignUp'>Sign Up</h1>
         <input

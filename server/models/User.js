@@ -14,7 +14,9 @@ const UserSchema = new mongoose.Schema({
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   matches: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   description: { type: String, required: false, maxlength: 300 }, 
-  hasProfile: { type: Boolean, default: false } 
+  hasProfile: { type: Boolean, default: false } ,
+  userImage: { type: String, required: false },
+
 });
 
 

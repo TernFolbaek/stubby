@@ -60,18 +60,40 @@ a{
 /* CONTAINER */
 .full-width-container{
   display: flex;
+  position: relative;
   justify-content: center;
   width: 100vw;
   background-color: rgb(25,26,31);
   align-items: start;
-  margin-top: 30px;
   height: 100vh; 
 }
+
+.h1-stubby {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 1rem 2rem;
+  background: none;
+  font-style: italic;
+  font-size: 80px;
+  color: white;
+}
+
 
 .bg-dark{
   background-color: rgb(25,26,31);
 
 }
+
+.profile-image-preview {
+  width: 100px; 
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%; 
+  margin-top: 1rem; 
+}
+
 
 
 /* SIDE ALIGNED DIVS */
@@ -120,11 +142,18 @@ a{
   min-height: 100vh;
 }
 
+.background-hero-dark {
+  background-image: url('./images/dark-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
 
 /* LOGIN & SIGNUP */
 #LogIn{
   background: none;
   padding-bottom: 5px;
+
 }
 
 #SignUp{
@@ -140,6 +169,7 @@ a{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   border-radius: 8px; 
   background: white; 
+  margin-top: 10%;
 }
 
 .LogIn input {

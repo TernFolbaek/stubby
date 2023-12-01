@@ -2,14 +2,17 @@ import React from 'react';
 
 const Step1 = ({ setFormData, formData }) => {
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, type } = e.target;
+    const value = type === 'file' ? e.target.files[0] : e.target.value;
+    setFormData({ ...formData, [name]: value });
   };
+  
 
   return (
-    <div className='form-container text-mono text-[25px] bg-dark'>
+    <div className='form-container text-mono text-[20px] bg-dark'>
       <div className='left-half w-full md:w-2/5 px-2 mb-6 flex-col bg-dark'>
         {/* First Name */}
-        <div className="name ">
+        <div className='name '>
           <div className='input-field flex-1 bg-dark'>
             <label htmlFor='firstName'>First Name</label>
             <input
@@ -65,6 +68,26 @@ const Step1 = ({ setFormData, formData }) => {
             onChange={handleChange}
           />
         </div>
+        <div className='input-field'>
+        <label htmlFor='profileImage'>Profile Image</label>
+        <input
+          className='step1-input'
+          id='profileImage'
+          name='profileImage'
+          type='file'
+          accept='image/*' // Accepts all image formats
+          onChange={handleChange}
+          required
+        />
+        {formData.profileImage && (
+          <img
+            src={URL.createObjectURL(formData.profileImage)}
+            alt='Profile Preview'
+            className='profile-image-preview'
+            onLoad={() => URL.revokeObjectURL(formData.profileImage)} // Clean up the object URL after loading
+          />
+        )}
+      </div>
       </div>
 
       <div className='right-half w-full md:w-2/5 px-2 mb-6'>
@@ -85,7 +108,6 @@ const Step1 = ({ setFormData, formData }) => {
             <option value='other'>Other</option>
           </select>
         </div>
-
         {/* LinkedIn Profile */}
         <div className='input-field'>
           <label htmlFor='linkedin'>LinkedIn Profile</label>
@@ -126,6 +148,7 @@ const Step1 = ({ setFormData, formData }) => {
           />
         </div>
       </div>
+      
     </div>
   );
 };

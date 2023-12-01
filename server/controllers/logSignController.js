@@ -51,10 +51,11 @@ const userLogIn = async (req, res) => {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    const payload = { userId: user._id };
+    const payload = { userId: user._id};
+
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '3h' });
 
-    res.json({ message: 'Logged in successfully', token, userId: user._id });
+    res.json({ message: 'Logged in successfully', token, userId: user._id , hasProfile: user.hasProfile});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });

@@ -16,15 +16,13 @@ const App = () => {
           <Home />
         </Route>
         <Route path="/login">
-          <Navbar />
           <LogIn />
         </Route>
         <Route path="/signup">
-          <Navbar />
           <SignUp />
         </Route>
         <Route path='/profile-info'>
-          <Navbar />
+          <Navbar/>
           <SignUpForm/> 
         </Route>
 

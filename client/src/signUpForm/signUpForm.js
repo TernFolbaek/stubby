@@ -20,6 +20,7 @@ const SignUpForm = () => {
     birthday: '',
     interests: [],
     description: '',
+    profileImage: null,
   });
 
   const handleNextStep = () => {
@@ -40,22 +41,26 @@ const SignUpForm = () => {
 
   const handleSubmit = async () => {
     const userId = localStorage.getItem('userId');
-
+    const profileData = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      profileData.append(key, value);
+    });
     if (!userId) {
       console.error('No user ID found');
       return;
     }
 
-    const profileData = { ...formData, userId };
-
-    console.log(profileData)
+    console.log(profileData);
 
     try {
       const response = await axios.post('/api/profile/signup', profileData);
       console.log(response.data);
       navigate('/profile');
     } catch (error) {
-      console.error('There was a problem with the signup request:', error.response);
+      console.error(
+        'There was a problem with the signup request:',
+        error.response
+      );
     }
   };
 
