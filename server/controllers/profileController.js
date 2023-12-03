@@ -3,9 +3,11 @@ const User = require('../models/user');
 const updateUserProfile = async (req, res) => {
   console.log('in profile backend')
   try {
-    const { userId, firstName, lastName, institution, location, gender, linkedin, position, birthday, interests, description } = req.body;
+    const { userId, firstName, lastName, institution, location, gender, linkedin, position, birthday, interests, description, profileImage} = req.body;
     let user = await User.findById(userId);
 
+    console.log(userId)
+    console.log(user)
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -22,6 +24,13 @@ const updateUserProfile = async (req, res) => {
     user.description = description;
     user.hasProfile = true; 
 
+
+    if (req.file) {
+      user.userImage = {
+        data: req.file.buffer,
+        contentType: req.file.mimetype
+      };
+    }
     await user.save();
 
     res.status(200).json({ message: 'User profile updated successfully' });
@@ -36,7 +45,7 @@ const fetchUserPortfolio = async (req, res) => {
     const {userId} = req.body
     let user = await User.findById(userId)
   } catch{
-    
+
   }
  
 

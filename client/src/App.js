@@ -7,6 +7,7 @@ import Home from './home/home';
 import { Route, Switch } from 'wouter';
 import ProtectedRoute from './protected/protectedRoutes';
 import SignUpForm from './signUpForm/signUpForm';
+import ExploreHome from './home/exploreHome';
 
 const App = () => {
   return (
@@ -24,6 +25,10 @@ const App = () => {
         <Route path='/profile-info'>
           <Navbar/>
           <SignUpForm/> 
+        </Route>
+
+        <Route path='/explore-home'>
+          <ExploreHome/>
         </Route>
 
         <ProtectedRoute path="/protected" />
