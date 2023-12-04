@@ -468,4 +468,60 @@ select.step1-input{
   color: rgb(183, 135, 245);
 }
 
+/* EXPLORE HOME */
+.explore-home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.explore-left{
+  display: flex;
+  justify-content: start;
+  width: 100%;
+}
+.matches-messages {
+  display: flex;
+  align-items: center;
+  gap: 20px; 
+  margin-bottom: 20px; 
+  padding: 20px;
+}
+.user-profile-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  max-width: 300px;
+}
+
+.profile-image {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+
+.user-image {
+  width: 50px; 
+  height: 50px; 
+  border-radius: 50%; 
+  object-fit: cover;
+}
+
+
+.matches-messages button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.matches-messages button:hover {
+  background-color: #0056b3;
+}
 
