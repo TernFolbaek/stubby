@@ -17,7 +17,7 @@ const Step3 = ({ setFormData, formData }) => {
         onChange={handleDescriptionChange}
       />
       <div className='character-count'>
-        {formData.description ? formData.description.length : 0}/300
+        {formData.description ? formData.description.length : 0}/400
       </div>
     </div>
   );

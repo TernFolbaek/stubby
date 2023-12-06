@@ -44,6 +44,10 @@ a{
   gap: 10%;
 }
 
+.custom-hr{
+  width: 80%;
+}
+
 .button-signup, .button-login{
   border: 2px solid rgba(131, 69, 203, 0.5);
 }
@@ -471,35 +475,115 @@ select.step1-input{
 /* EXPLORE HOME */
 .explore-home-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
+  height: 100vh;
 }
 
 .explore-left{
   display: flex;
-  justify-content: start;
+  flex-direction: column;
+  height: 100%;
   width: 100%;
+  flex: 0.7;
+  overflow-x: hidden;
 }
-.matches-messages {
+
+.explore-right{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+}
+
+
+.matches-messages button {
+  padding: 10px 15px;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-bottom: 3px solid transparent; /* Default no border */
+}
+
+.matches-messages{
   display: flex;
   align-items: center;
-  gap: 20px; 
-  margin-bottom: 20px; 
+  width: 100%;
   padding: 20px;
+  gap: 10px;
 }
+
+.matches-messages button:hover {
+
+}
+
+.matches-messages button.active {
+  border-bottom: 3px solid white; /* Active button border */
+}
+
 .user-profile-card {
+  display: flex;
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 20px;
-  text-align: center;
-  max-width: 300px;
+  margin-bottom: 20px;
+  width: 90%;
+  height: 300px;
+  align-items: center;
 }
 
+.user-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.user-details {
+  margin-left: 20px;
+}
+
+.user-card-left{
+  flex: 0.5;
+}
+
+.user-card-right{
+  flex: 0.8;
+}
 .profile-image {
-  width: 100%;
-  height: auto;
+  width: 80px; 
+  height: 80px;
   border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-description {
+  flex-grow: 1;
+  margin-left: 40px; /* Space between info and description */
+  padding-left: 20px;
+  border-left: 1px solid #ddd; /* Separator line */
+}
+
+.interaction-buttons {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 10px;
+}
+
+.explore-right button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid #4285F4;
+  background-color: #fff;
+  transition: background-color 0.3s;
+}
+
+.explore-right button:hover {
+  background-color: #4285F4;
+  color: white;
 }
 
 
@@ -514,14 +598,12 @@ select.step1-input{
 .matches-messages button {
   padding: 10px 15px;
   border: none;
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
+  color: rgb(205, 173, 237);
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .matches-messages button:hover {
-  background-color: #0056b3;
+
 }
 

@@ -1,13 +1,32 @@
 import React from 'react';
 
 const Step1 = ({ setFormData, formData }) => {
+  const calculateAge = (birthday) => {
+    const birthDate = new Date(birthday);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    if (
+      monthDifference < 0 ||
+      (monthDifference === 0 && today.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+    return parseInt(age);
+  };
+
   const handleChange = (e) => {
     const { name, type } = e.target;
     const value = type === 'file' ? e.target.files[0] : e.target.value;
-    setFormData({ ...formData, [name]: value });
-  };
   
-
+    if (name === 'birthday') {
+      const age = calculateAge(value);
+      console.log(age)
+      setFormData({ ...formData, birthday: value, age });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
   return (
     <div className='form-container text-mono text-[20px] bg-dark'>
       <div className='left-half w-full md:w-2/5 px-2 mb-6 flex-col bg-dark'>
@@ -69,25 +88,25 @@ const Step1 = ({ setFormData, formData }) => {
           />
         </div>
         <div className='input-field'>
-        <label htmlFor='profileImage'>Profile Image</label>
-        <input
-          className='step1-input'
-          id='profileImage'
-          name='profileImage'
-          type='file'
-          accept='image/*' // Accepts all image formats
-          onChange={handleChange}
-          required
-        />
-        {formData.profileImage && (
-          <img
-            src={URL.createObjectURL(formData.profileImage)}
-            alt='Profile Preview'
-            className='profile-image-preview'
-            onLoad={() => URL.revokeObjectURL(formData.profileImage)} // Clean up the object URL after loading
+          <label htmlFor='profileImage'>Profile Image</label>
+          <input
+            className='step1-input'
+            id='profileImage'
+            name='profileImage'
+            type='file'
+            accept='image/*' // Accepts all image formats
+            onChange={handleChange}
+            required
           />
-        )}
-      </div>
+          {formData.profileImage && (
+            <img
+              src={URL.createObjectURL(formData.profileImage)}
+              alt='Profile Preview'
+              className='profile-image-preview'
+              onLoad={() => URL.revokeObjectURL(formData.profileImage)} // Clean up the object URL after loading
+            />
+          )}
+        </div>
       </div>
 
       <div className='right-half w-full md:w-2/5 px-2 mb-6'>
@@ -148,7 +167,6 @@ const Step1 = ({ setFormData, formData }) => {
           />
         </div>
       </div>
-      
     </div>
   );
 };

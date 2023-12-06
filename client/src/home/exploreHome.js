@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Match from './Match';
 
 const ExploreHome = () => {
   const [userInfo, setUserInfo] = useState({
@@ -26,25 +27,57 @@ const ExploreHome = () => {
     try {
       const userId = localStorage.getItem('userId');
       const response = await axios.get(`/api/explore/users/${userId}`);
-      const usersData = response.data.map((user) => {
-        let imageDataUrl = '';
+      const usersData = await Promise.all(
+        response.data.map(async (user) => {
+          let imageDataUrl = '';
+          if (
+            user.userImage &&
+            user.userImage.data &&
+            user.userImage.contentType
+          ) {
+            const blob = new Blob([new Uint8Array(user.userImage.data.data)], {
+              type: user.userImage.contentType,
+            });
+            imageDataUrl = await new Promise((resolve, reject) => {
+              const reader = new FileReader();
+              reader.onloadend = () => resolve(reader.result);
+              reader.onerror = reject;
+              reader.readAsDataURL(blob);
+            });
+          }
 
-        if (
-          user.userImage &&
-          user.userImage.data &&
-          user.userImage.contentType
-        ) {
-          // Convert the array buffer to a string
-          const binary = String.fromCharCode.apply(
-            null,
-            user.userImage.data.data
-          );
-          const base64String = btoa(binary);
-          imageDataUrl = `data:${user.userImage.contentType};base64,${base64String}`;
-        }
+          let interestsArray = [];
+          if (Array.isArray(user.interests) && user.interests.length > 0) {
+            try {
+              interestsArray = JSON.parse(user.interests[0]);
+            } catch (e) {
+              console.error('Error parsing interests:', e);
+              interestsArray = [];
+            }
+          } else if (typeof user.interests === 'string') {
+            try {
+              // Directly parse the string as JSON
+              interestsArray = JSON.parse(user.interests);
+            } catch (e) {
+              console.error('Error parsing interests:', e);
+              interestsArray = [];
+            }
+          }
 
-        return { ...user, userImage: imageDataUrl };
-      });
+          const institution = user.institution?.replace(/"/g, '') || '';
+          const location = user.location?.replace(/"/g, '') || '';
+          const description = user.description?.replace(/"/g, '') || '';
+
+          return {
+            ...user,
+            userImage: imageDataUrl,
+            interests: interestsArray,
+            institution,
+            location,
+            description,
+          };
+        })
+      );
       setUsersToExplore(usersData);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -113,6 +146,10 @@ const ExploreHome = () => {
     setCurrentIndex(currentIndex + 1);
   };
 
+  const setActiveViewWithStyle = (view) => {
+    setActiveView(view);
+  };
+
   return (
     <div className='explore-home-container'>
       <div className='explore-left'>
@@ -124,47 +161,75 @@ const ExploreHome = () => {
               className='user-image'
             />
           </div>
-          <button onClick={() => setActiveView('matches')}>Matches</button>
-          <button onClick={() => setActiveView('messages')}>Messages</button>
+          <button
+            className={activeView === 'matches' ? 'active' : ''}
+            onClick={() => setActiveViewWithStyle('matches')}
+          >
+            Matches
+          </button>
+          <button
+            className={activeView === 'messages' ? 'active' : ''}
+            onClick={() => setActiveViewWithStyle('messages')}
+          >
+            Messages
+          </button>
         </div>
+        <hr />
         <div className='explore'>
           {activeView === 'matches' && (
             <div>
-              {/* Render matches here */}
-              {userInfo.matches.map((match, index) => (
-                <div key={index}>Match {index + 1}</div> // Replace with your match rendering logic
+              {userInfo.matches.map((matchId) => (
+                <Match key={matchId} matchId={matchId} />
               ))}
             </div>
           )}
-          {activeView === 'messages' && (
-            <div>{/* Messages rendering logic will go here */}</div>
-          )}
+          {activeView === 'messages' && <div></div>}
         </div>
       </div>
       <div className='explore-right'>
         {usersToExplore.length > 0 && currentIndex < usersToExplore.length ? (
           <div className='user-profile-card'>
-            <img
-              src={usersToExplore[currentIndex].userImage}
-              alt={usersToExplore[currentIndex].username}
-              className='profile-image'
-            />
-            <h3>{usersToExplore[currentIndex].username}</h3>
-            <p>Location: {usersToExplore[currentIndex].location}</p>
-            <p>Age: {usersToExplore[currentIndex].age}</p>
-            <p>School: {usersToExplore[currentIndex].school}</p>
-            <p>
-              Interests: {usersToExplore[currentIndex].interests.join(', ')}
-            </p>
-            <button
-              onClick={() =>
-                handleUserInteraction(true, usersToExplore[currentIndex]._id)
-              }
-            >
-              Yes
-            </button>
-
-            <button onClick={() => handleUserInteraction(false)}>No</button>
+            <div className='user-card-left'>
+              <div className='user-info'>
+                <img
+                  src={usersToExplore[currentIndex].userImage}
+                  alt={usersToExplore[currentIndex].username}
+                  className='profile-image'
+                />
+                <div className='user-details'>
+                  <h3>{usersToExplore[currentIndex].username}</h3>
+                  <h3>School: {usersToExplore[currentIndex].institution}</h3>
+                  <p>Location: {usersToExplore[currentIndex].location}</p>
+                  <p>Age: {usersToExplore[currentIndex].age}</p>
+                  <div>
+                    {usersToExplore[currentIndex].interests.map(
+                      (interest, index) => (
+                        <h3 key={index}>{interest}</h3>
+                      )
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='user-card-right'>
+              <div className='user-description'>
+                <h3>Description</h3>
+                <p>{usersToExplore[currentIndex].description}</p>
+              </div>
+              <div className='interaction-buttons'>
+                <button
+                  onClick={() =>
+                    handleUserInteraction(
+                      true,
+                      usersToExplore[currentIndex]._id
+                    )
+                  }
+                >
+                  Yes
+                </button>
+                <button onClick={() => handleUserInteraction(false)}>No</button>
+              </div>
+            </div>
           </div>
         ) : (
           <div>No more users to explore</div>

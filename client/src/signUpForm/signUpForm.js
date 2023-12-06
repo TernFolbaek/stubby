@@ -17,10 +17,10 @@ const SignUpForm = () => {
     gender: '',
     linkedin: '',
     position: '',
-    birthday: '',
+    age: '',
     interests: [],
     description: '',
-    profileImage: null
+    profileImage: null,
   });
 
   const handleNextStep = () => {
@@ -41,14 +41,14 @@ const SignUpForm = () => {
 
   const handleSubmit = async () => {
     const userId = localStorage.getItem('userId');
-  
+
     if (!userId) {
       console.error('No user ID found');
       return;
     }
-  
+
     const profileData = new FormData();
-    
+    console.log(formData);
     Object.entries(formData).forEach(([key, value]) => {
       if (key === 'profileImage' && value instanceof File) {
         profileData.append(key, value);
@@ -57,7 +57,7 @@ const SignUpForm = () => {
       }
     });
     profileData.append('userId', userId);
-  
+
     try {
       const response = await axios.post('/api/profile/signup', profileData, {
         headers: {
@@ -67,10 +67,12 @@ const SignUpForm = () => {
       console.log(response.data);
       navigate('/explore-home');
     } catch (error) {
-      console.error('There was a problem with the signup request:', error.response);
+      console.error(
+        'There was a problem with the signup request:',
+        error.response
+      );
     }
   };
-  
 
   return (
     <div className='bg-dark'>
