@@ -90,6 +90,10 @@ a{
 
 }
 
+.bg-none{
+  background: none;
+}
+
 .profile-image-preview {
   width: 100px; 
   height: 100px;
@@ -486,6 +490,7 @@ select.step1-input{
   width: 100%;
   flex: 0.7;
   overflow-x: hidden;
+  border-right: 1px solid white;
 }
 
 .explore-right{
@@ -501,10 +506,11 @@ select.step1-input{
   padding: 10px 15px;
   border: none;
   color: white;
-  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  border-bottom: 3px solid transparent; /* Default no border */
+  border-bottom: 3px solid transparent; 
+  background: none;
+  font-weight: 900;
 }
 
 .matches-messages{
@@ -513,6 +519,8 @@ select.step1-input{
   width: 100%;
   padding: 20px;
   gap: 10px;
+  background-image: linear-gradient(to right, purple, pink); 
+
 }
 
 .matches-messages button:hover {
@@ -588,22 +596,49 @@ select.step1-input{
 
 
 .user-image {
-  width: 50px; 
-  height: 50px; 
+  width: 40px; 
+  height: 40px; 
   border-radius: 50%; 
   object-fit: cover;
+  background: none;
 }
 
-
-.matches-messages button {
-  padding: 10px 15px;
-  border: none;
-  color: rgb(205, 173, 237);
-  cursor: pointer;
-  transition: background-color 0.3s;
+.current-user{
+  display: flex;
+  background: none;
+  gap: 5px;
+  align-items: center;
 }
+
 
 .matches-messages button:hover {
 
 }
 
+
+.match {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.interests-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.interest {
+  border: 1px solid white;
+  border-radius: 10px; 
+  padding: 5px 10px;
+  white-space: nowrap; 
+}

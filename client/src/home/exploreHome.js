@@ -13,6 +13,7 @@ const ExploreHome = () => {
     matches: [],
     description: '',
     userImage: '',
+    firstName: '',
   });
   const [usersToExplore, setUsersToExplore] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -56,7 +57,6 @@ const ExploreHome = () => {
             }
           } else if (typeof user.interests === 'string') {
             try {
-              // Directly parse the string as JSON
               interestsArray = JSON.parse(user.interests);
             } catch (e) {
               console.error('Error parsing interests:', e);
@@ -67,6 +67,7 @@ const ExploreHome = () => {
           const institution = user.institution?.replace(/"/g, '') || '';
           const location = user.location?.replace(/"/g, '') || '';
           const description = user.description?.replace(/"/g, '') || '';
+          
 
           return {
             ...user,
@@ -105,6 +106,9 @@ const ExploreHome = () => {
         description,
         userImage,
       } = response.data;
+
+      const firstName = response.data.firstName?.replace(/"/g, '') || '';
+
       const imageDataUrl = userImage
         ? `data:${userImage.contentType};base64,${userImage.data}`
         : '';
@@ -119,6 +123,7 @@ const ExploreHome = () => {
         matches,
         description,
         userImage: imageDataUrl,
+        firstName,
       });
     } catch (error) {
       console.error('Error fetching user info:', error);
@@ -154,13 +159,15 @@ const ExploreHome = () => {
     <div className='explore-home-container'>
       <div className='explore-left'>
         <div className='matches-messages'>
-          <div>
+          <div className='current-user'>
             <img
               src={userInfo.userImage}
               alt={userInfo.username}
               className='user-image'
             />
+            <h4 className='bg-none'>{userInfo.firstName}</h4>
           </div>
+
           <button
             className={activeView === 'matches' ? 'active' : ''}
             onClick={() => setActiveViewWithStyle('matches')}
@@ -178,8 +185,8 @@ const ExploreHome = () => {
         <div className='explore'>
           {activeView === 'matches' && (
             <div>
-              {userInfo.matches.map((matchId) => (
-                <Match key={matchId} matchId={matchId} />
+              {userInfo.matches.map((matchId, index) => (
+                <Match key={index} matchId={matchId} />
               ))}
             </div>
           )}
