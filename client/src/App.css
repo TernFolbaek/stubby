@@ -235,7 +235,7 @@ a{
 
 .signup-prompt {
   margin-top: 20px;
-  font-size: 14px; /* Adjust as needed */
+  font-size: 14px; 
 }
 
 .signup-link {
@@ -297,7 +297,7 @@ a{
 .step1-input, select.step-1input {
   width: 75%;
   padding: 10px;
-  border: 2px solid rgba(192, 132, 252, 0.5); /* 0.5 opacity */
+  border: 2px solid rgba(192, 132, 252, 0.5); 
   border-radius: 8px;
   background-color: #F2E3FE;
   font-size: 15px;
@@ -491,14 +491,25 @@ select.step1-input{
   flex: 0.7;
   overflow-x: hidden;
   border-right: 1px solid white;
+  background-color: #131212;
+
 }
 
 .explore-right{
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   flex: 1;
   height: 100%;
+  width: 100%;
+  gap: 10%;
+  margin: 5%;
+  flex-direction: column;
+}
+
+.explore-right h1{
+  font-size: 60px;
+  font-style: italic;
 }
 
 
@@ -519,7 +530,7 @@ select.step1-input{
   width: 100%;
   padding: 20px;
   gap: 10px;
-  background-image: linear-gradient(to right, purple, pink); 
+  background-color: #c072ff;
 
 }
 
@@ -528,7 +539,7 @@ select.step1-input{
 }
 
 .matches-messages button.active {
-  border-bottom: 3px solid white; /* Active button border */
+  border-bottom: 3px solid white; 
 }
 
 .user-profile-card {
@@ -568,9 +579,9 @@ select.step1-input{
 
 .user-description {
   flex-grow: 1;
-  margin-left: 40px; /* Space between info and description */
+  margin-left: 40px; 
   padding-left: 20px;
-  border-left: 1px solid #ddd; /* Separator line */
+  border-left: 1px solid #ddd; 
 }
 
 .interaction-buttons {
@@ -594,7 +605,6 @@ select.step1-input{
   color: white;
 }
 
-
 .user-image {
   width: 40px; 
   height: 40px; 
@@ -603,6 +613,7 @@ select.step1-input{
   background: none;
 }
 
+
 .current-user{
   display: flex;
   background: none;
@@ -610,35 +621,42 @@ select.step1-input{
   align-items: center;
 }
 
-
 .matches-messages button:hover {
 
 }
 
+.explore {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  background-color: #131212;
+  padding: 20px;
+
+}
+
+.match-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.match-name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  background-color: rgba(0,0,0,0.6);
+}
 
 .match {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: relative;
+  border-radius: 10px;
 }
 
-.top-section {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
 
-.interests-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-  justify-content: center;
-}
 
-.interest {
-  border: 1px solid white;
-  border-radius: 10px; 
-  padding: 5px 10px;
-  white-space: nowrap; 
-}
+

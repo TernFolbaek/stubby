@@ -67,7 +67,6 @@ const ExploreHome = () => {
           const institution = user.institution?.replace(/"/g, '') || '';
           const location = user.location?.replace(/"/g, '') || '';
           const description = user.description?.replace(/"/g, '') || '';
-          
 
           return {
             ...user,
@@ -181,66 +180,70 @@ const ExploreHome = () => {
             Messages
           </button>
         </div>
-        <hr />
-        <div className='explore'>
-          {activeView === 'matches' && (
-            <div>
-              {userInfo.matches.map((matchId, index) => (
-                <Match key={index} matchId={matchId} />
-              ))}
-            </div>
-          )}
-          {activeView === 'messages' && <div></div>}
-        </div>
+
+        {activeView === 'matches' && (
+          <div className='explore'>
+            {userInfo.matches.map((matchId, index) => (
+              <Match key={index} matchId={matchId} />
+            ))}
+          </div>
+        )}
+        {activeView === 'messages' && <div></div>}
       </div>
+
       <div className='explore-right'>
-        {usersToExplore.length > 0 && currentIndex < usersToExplore.length ? (
-          <div className='user-profile-card'>
-            <div className='user-card-left'>
-              <div className='user-info'>
-                <img
-                  src={usersToExplore[currentIndex].userImage}
-                  alt={usersToExplore[currentIndex].username}
-                  className='profile-image'
-                />
-                <div className='user-details'>
-                  <h3>{usersToExplore[currentIndex].username}</h3>
-                  <h3>School: {usersToExplore[currentIndex].institution}</h3>
-                  <p>Location: {usersToExplore[currentIndex].location}</p>
-                  <p>Age: {usersToExplore[currentIndex].age}</p>
-                  <div>
-                    {usersToExplore[currentIndex].interests.map(
-                      (interest, index) => (
-                        <h3 key={index}>{interest}</h3>
-                      )
-                    )}
+        <h1>Find Your Study Mate</h1>
+        <div>
+          {usersToExplore.length > 0 && currentIndex < usersToExplore.length ? (
+            <div className='user-profile-card'>
+              <div className='user-card-left'>
+                <div className='user-info'>
+                  <img
+                    src={usersToExplore[currentIndex].userImage}
+                    alt={usersToExplore[currentIndex].username}
+                    className='profile-image'
+                  />
+                  <div className='user-details'>
+                    <h3>{usersToExplore[currentIndex].username}</h3>
+                    <h3>School: {usersToExplore[currentIndex].institution}</h3>
+                    <p>Location: {usersToExplore[currentIndex].location}</p>
+                    <p>Age: {usersToExplore[currentIndex].age}</p>
+                    <div>
+                      {usersToExplore[currentIndex].interests.map(
+                        (interest, index) => (
+                          <h3 key={index}>{interest}</h3>
+                        )
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className='user-card-right'>
-              <div className='user-description'>
-                <h3>Description</h3>
-                <p>{usersToExplore[currentIndex].description}</p>
+              <div className='user-card-right'>
+                <div className='user-description'>
+                  <h3>Description</h3>
+                  <p>{usersToExplore[currentIndex].description}</p>
+                </div>
+                <div className='interaction-buttons'>
+                  <button
+                    onClick={() =>
+                      handleUserInteraction(
+                        true,
+                        usersToExplore[currentIndex]._id
+                      )
+                    }
+                  >
+                    Yes
+                  </button>
+                  <button onClick={() => handleUserInteraction(false)}>
+                    No
+                  </button>
+                </div>
               </div>
-              <div className='interaction-buttons'>
-                <button
-                  onClick={() =>
-                    handleUserInteraction(
-                      true,
-                      usersToExplore[currentIndex]._id
-                    )
-                  }
-                >
-                  Yes
-                </button>
-                <button onClick={() => handleUserInteraction(false)}>No</button>
-              </div>
             </div>
-          </div>
-        ) : (
-          <div>No more users to explore</div>
-        )}
+          ) : (
+            <div>No more users to explore</div>
+          )}
+        </div>
       </div>
     </div>
   );
