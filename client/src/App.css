@@ -6,7 +6,7 @@
   padding: 0;
   background-color: rgb(25,26,31);
   overflow-y: hidden;
-  
+  user-select: none;
 }
 
 body, html {
@@ -98,7 +98,7 @@ a{
   width: 100px; 
   height: 100px;
   object-fit: cover;
-  border-radius: 50%; 
+  border-radius: 50%;
   margin-top: 1rem; 
 }
 
@@ -481,6 +481,7 @@ select.step1-input{
   display: flex;
   width: 100%;
   height: 100vh;
+  background-color: rgb(255, 255, 255);
 }
 
 .explore-left{
@@ -502,14 +503,23 @@ select.step1-input{
   flex: 1;
   height: 100%;
   width: 100%;
-  gap: 10%;
+  gap: 5px;
   margin: 5%;
   flex-direction: column;
+  background-color: white;
 }
 
 .explore-right h1{
   font-size: 60px;
+  padding-bottom: 20px;
   font-style: italic;
+  background-color: white;
+  color: rgb(183, 135, 245);
+  z-index: 1000;
+}
+
+.study-mate-card-container{
+  background: white;
 }
 
 
@@ -544,50 +554,96 @@ select.step1-input{
 
 .user-profile-card {
   display: flex;
-  border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 35px;
+  margin-bottom: 400px;
   width: 90%;
-  height: 300px;
+  height: 400px;
   align-items: center;
+  background-color: black;
+  box-shadow: 7px 7px 10px gray;
 }
 
 .user-info {
   display: flex;
   flex-direction: row;
   align-items: center;
+  background-color: black;
+}
+
+.user-card-left h2,h3,p{
+  background-color: black;
 }
 
 .user-details {
   margin-left: 20px;
+  background-color: black;
 }
 
 .user-card-left{
   flex: 0.5;
+  background-color: black;
+  border-right: 1px solid #ddd; 
+  padding-right: 10px
+
 }
 
 .user-card-right{
   flex: 0.8;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+
 }
+.user-card-right h2{
+  text-align: center;
+  background-color: black;
+  
+}
+
 .profile-image {
-  width: 80px; 
-  height: 80px;
-  border-radius: 50%;
+  width: 280px; 
+  height: 280px;
   object-fit: cover;
+  border-radius: 10px;
+}
+
+.user-card-title{
+  text-align: center;
+  margin: 10px;
+}
+
+.interest-card-container{
+  display: grid;
+  padding-left: 60px;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 5px;
+  column-gap: 5px;
+  background-color: black;
+  margin: 10px;
+
+}
+
+.user-interests{
+  background-color: black;
 }
 
 .user-description {
   flex-grow: 1;
   margin-left: 40px; 
   padding-left: 20px;
-  border-left: 1px solid #ddd; 
+  background-color: black;
+  text-align: justify;
+
 }
 
 .interaction-buttons {
   display: flex;
-  justify-content: space-around;
-  padding-top: 10px;
+  justify-content: space-between;
+  background-color: white;
+  position: absolute;
+  bottom: 10px;
+  width: 200px;
 }
 
 .explore-right button {
@@ -659,4 +715,16 @@ select.step1-input{
 
 
 
+.no, .yes{
+  background-color: white;
+  cursor: pointer;
+  color: black;
+}
 
+.yes:hover{
+  color: lightgreen;
+}
+
+.no:hover{
+  color: rgb(246, 79, 79);
+}

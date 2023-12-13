@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Match from './Match';
+import { mdiCheckCircleOutline, mdiAlphaXCircleOutline } from '@mdi/js';
+import Icon from '@mdi/react';
 
 const ExploreHome = () => {
   const [userInfo, setUserInfo] = useState({
@@ -193,7 +195,7 @@ const ExploreHome = () => {
 
       <div className='explore-right'>
         <h1>Find Your Study Mate</h1>
-        <div>
+        <div className='study-mate-card-container'>
           {usersToExplore.length > 0 && currentIndex < usersToExplore.length ? (
             <div className='user-profile-card'>
               <div className='user-card-left'>
@@ -203,46 +205,62 @@ const ExploreHome = () => {
                     alt={usersToExplore[currentIndex].username}
                     className='profile-image'
                   />
-                  <div className='user-details'>
-                    <h3>{usersToExplore[currentIndex].username}</h3>
-                    <h3>School: {usersToExplore[currentIndex].institution}</h3>
-                    <p>Location: {usersToExplore[currentIndex].location}</p>
-                    <p>Age: {usersToExplore[currentIndex].age}</p>
-                    <div>
-                      {usersToExplore[currentIndex].interests.map(
-                        (interest, index) => (
-                          <h3 key={index}>{interest}</h3>
-                        )
-                      )}
-                    </div>
-                  </div>
                 </div>
+                <h2>
+                  {usersToExplore[currentIndex].username},{' '}
+                  {usersToExplore[currentIndex].age}{' '}
+                </h2>
+                <h3>{usersToExplore[currentIndex].location}</h3>
+                <h3>{usersToExplore[currentIndex].institution}</h3>
               </div>
               <div className='user-card-right'>
+                <h2 className='user-card-title'>
+                  About {usersToExplore[currentIndex].username}
+                </h2>
+                <div className='user-details'></div>
                 <div className='user-description'>
-                  <h3>Description</h3>
                   <p>{usersToExplore[currentIndex].description}</p>
                 </div>
-                <div className='interaction-buttons'>
-                  <button
-                    onClick={() =>
-                      handleUserInteraction(
-                        true,
-                        usersToExplore[currentIndex]._id
-                      )
-                    }
-                  >
-                    Yes
-                  </button>
-                  <button onClick={() => handleUserInteraction(false)}>
-                    No
-                  </button>
+                <h3 className='user-card-title'>Subjects of interest:</h3>
+                <div className='interest-card-container'>
+                  {usersToExplore[currentIndex].interests.map(
+                    (interest, index) => (
+                      <li className='user-interests' key={index}>
+                        {interest}
+                      </li>
+                    )
+                  )}
                 </div>
               </div>
             </div>
           ) : (
             <div>No more users to explore</div>
           )}
+        </div>
+        <div className='interaction-buttons'>
+          <Icon
+            onClick={() =>
+              handleUserInteraction(true, usersToExplore[currentIndex]._id)
+            }
+            path={mdiCheckCircleOutline}
+            title='checkmark'
+            size={3}
+            horizontal
+            vertical
+            rotate={180}
+            className='yes'
+          />
+          <Icon
+            onClick={() => handleUserInteraction(false)}
+            path={mdiAlphaXCircleOutline}
+            title='checkmark'
+            size={3}
+            horizontal
+            vertical
+            rotate={180}
+            className='no'
+          />
+
         </div>
       </div>
     </div>
