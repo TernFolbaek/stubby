@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Match from './Match';
-import { mdiCheckCircleOutline, mdiAlphaXCircleOutline } from '@mdi/js';
+import { mdiHeartCircleOutline, mdiAlphaXCircleOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 
 const ExploreHome = () => {
@@ -194,7 +194,6 @@ const ExploreHome = () => {
       </div>
 
       <div className='explore-right'>
-        <h1>Find Your Study Mate</h1>
         <div className='study-mate-card-container'>
           {usersToExplore.length > 0 && currentIndex < usersToExplore.length ? (
             <div className='user-profile-card'>
@@ -221,6 +220,7 @@ const ExploreHome = () => {
                 <div className='user-description'>
                   <p>{usersToExplore[currentIndex].description}</p>
                 </div>
+
                 <h3 className='user-card-title'>Subjects of interest:</h3>
                 <div className='interest-card-container'>
                   {usersToExplore[currentIndex].interests.map(
@@ -242,7 +242,7 @@ const ExploreHome = () => {
             onClick={() =>
               handleUserInteraction(true, usersToExplore[currentIndex]._id)
             }
-            path={mdiCheckCircleOutline}
+            path={mdiHeartCircleOutline}
             title='checkmark'
             size={3}
             horizontal

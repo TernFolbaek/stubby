@@ -134,7 +134,7 @@ a{
 }
 
 .Navbar h1{
-  font-size: 80px;
+  font-size: 50px;
 }
 
 .App{
@@ -144,14 +144,14 @@ a{
 
 /* HOME */
 .background-hero {
-  background-image: url('./images/home.jpg');
+  background-image: url('../images/home.jpg');
   background-size: cover;
   background-position: center;
   min-height: 100vh;
 }
 
 .background-hero-dark {
-  background-image: url('./images/dark-bg.jpg');
+  background-image: url('../images/dark-bg.jpg');
   background-size: cover;
   background-position: center;
   min-height: 100vh;
@@ -265,7 +265,7 @@ a{
 
 .custom-hr{
   width: 100vw;
-  border: 1.5px solid lightgray;
+  border: 0.5px solid lightgray;
   margin-bottom: 50px;
 }
 
@@ -297,11 +297,12 @@ a{
 .step1-input, select.step-1input {
   width: 75%;
   padding: 10px;
-  border: 2px solid rgba(192, 132, 252, 0.5); 
+  border: 0.5px solid rgb(67, 63, 63); 
   border-radius: 8px;
-  background-color: #F2E3FE;
+  background-color: black;
   font-size: 15px;
   font-family: monospace;
+  color: lightgray;
 }
 
 select.step1-input{
@@ -311,8 +312,9 @@ select.step1-input{
 
 .step1-input:focus {
   outline: none;
-  background-color: rgb(205, 173, 237);
+  border: 1px solid rgb(102, 198, 230);
 }
+
 
 
 .next-back{
@@ -354,8 +356,10 @@ select.step1-input{
 }
 
 .custom-subject-input input{
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: lightgray;
+  border: 0.5px solid lightgray;
+  border-radius: 0;
   outline: none;
   padding: 5px;
   margin: 5px;
@@ -481,7 +485,11 @@ select.step1-input{
   display: flex;
   width: 100%;
   height: 100vh;
-  background-color: rgb(255, 255, 255);
+  background-color: #F3F8FF;
+}
+
+.user-profile-card h2{
+  font-size: 32px;
 }
 
 .explore-left{
@@ -489,10 +497,10 @@ select.step1-input{
   flex-direction: column;
   height: 100%;
   width: 100%;
-  flex: 0.7;
+  flex: 0.45;
   overflow-x: hidden;
   border-right: 1px solid white;
-  background-color: #131212;
+  background-color: #242333;
 
 }
 
@@ -504,22 +512,21 @@ select.step1-input{
   height: 100%;
   width: 100%;
   gap: 5px;
-  margin: 5%;
   flex-direction: column;
-  background-color: white;
+  background-color: #F3F8FF;
 }
 
 .explore-right h1{
   font-size: 60px;
   padding-bottom: 20px;
   font-style: italic;
-  background-color: white;
+  background-color: #F3F8FF;
   color: rgb(183, 135, 245);
   z-index: 1000;
 }
 
 .study-mate-card-container{
-  background: white;
+  background: #F3F8FF;
 }
 
 
@@ -540,11 +547,7 @@ select.step1-input{
   width: 100%;
   padding: 20px;
   gap: 10px;
-  background-color: #c072ff;
-
-}
-
-.matches-messages button:hover {
+  background-color: #7E30E1;
 
 }
 
@@ -556,12 +559,14 @@ select.step1-input{
   display: flex;
   border-radius: 10px;
   padding: 35px;
-  margin-bottom: 400px;
-  width: 90%;
-  height: 400px;
+  margin-top: 80px;
+  margin-left: 50px;
+  width: 70%;
+  height: 500px;
   align-items: center;
   background-color: black;
   box-shadow: 7px 7px 10px gray;
+
 }
 
 .user-info {
@@ -592,25 +597,30 @@ select.step1-input{
   flex: 0.8;
   background-color: black;
   display: flex;
+  margin-top: 25px;
   flex-direction: column;
-
+  justify-content: start;
+  height: 100%;
 }
+
+.user-card-right p{
+  font-size: 18px;
+}
+
 .user-card-right h2{
-  text-align: center;
   background-color: black;
   
 }
 
 .profile-image {
-  width: 280px; 
-  height: 280px;
+  width: 300px; 
+  height: 400px;
   object-fit: cover;
   border-radius: 10px;
 }
 
 .user-card-title{
-  text-align: center;
-  margin: 10px;
+  margin-left: 20px;
 }
 
 .interest-card-container{
@@ -629,18 +639,17 @@ select.step1-input{
 }
 
 .user-description {
-  flex-grow: 1;
-  margin-left: 40px; 
-  padding-left: 20px;
   background-color: black;
   text-align: justify;
+  margin-left: 20px;
+  padding-bottom: 20px;
 
 }
 
 .interaction-buttons {
   display: flex;
   justify-content: space-between;
-  background-color: white;
+  background-color: #F3F8FF;
   position: absolute;
   bottom: 10px;
   width: 200px;
@@ -652,7 +661,7 @@ select.step1-input{
   border-radius: 5px;
   cursor: pointer;
   border: 1px solid #4285F4;
-  background-color: #fff;
+  background-color: #F3F8FF;
   transition: background-color 0.3s;
 }
 
@@ -685,14 +694,14 @@ select.step1-input{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  background-color: #131212;
+  background-color: #242333;
   padding: 20px;
 
 }
 
 .match-image {
   width: 100%;
-  height: 100%;
+  height: 140px;
   object-fit: cover;
   border-radius: 5px;
 }
@@ -716,15 +725,27 @@ select.step1-input{
 
 
 .no, .yes{
-  background-color: white;
+  background-color: #F3F8FF;
   cursor: pointer;
   color: black;
 }
 
+.yes{
+  color: rgb(0, 213, 0);
+
+}
+
+.no{
+  color: rgb(237, 26, 26);
+
+}
+
 .yes:hover{
   color: lightgreen;
+
 }
 
 .no:hover{
   color: rgb(246, 79, 79);
+
 }
