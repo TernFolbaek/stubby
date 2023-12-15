@@ -5,6 +5,8 @@ import axios from 'axios';
 import Step1 from './step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
+import ProgressBar from './helper/ProgressBar';
+
 const SignUpForm = () => {
   const [, navigate] = useLocation();
 
@@ -77,7 +79,9 @@ const SignUpForm = () => {
   return (
     <div className='bg-dark'>
       <div className='custom-hr' />
-      <div>
+      <ProgressBar currentStep={currentStep} totalSteps={3} />
+
+      <div className='py-7'> 
         {currentStep === 1 && (
           <Step1 setFormData={handleFormDataChange} formData={formData} />
         )}

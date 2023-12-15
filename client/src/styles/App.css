@@ -271,7 +271,7 @@ a{
 
 .name{
   display: flex;
-  width: 86%;
+
 }
 
 
@@ -303,6 +303,7 @@ a{
   font-size: 15px;
   font-family: monospace;
   color: lightgray;
+  margin: 5px 0px;
 }
 
 select.step1-input{
@@ -312,22 +313,82 @@ select.step1-input{
 
 .step1-input:focus {
   outline: none;
-  border: 1px solid rgb(102, 198, 230);
+  border: 1px solid rgb(255, 255, 255);
 }
 
+.form-container label{
+  font-size: 17px;
+
+}
 
 
 .next-back{
-  display: flex;
-  justify-content: center;
-  align-items: start;
-  margin-top: 10px;
-  width: 100%;
-  padding: 20px;
-  height: 100vh;
+  position: absolute;
+  bottom: 15px;
+  left: 50%; 
+  transform: translateX(-50%);
 }
 .step1{
   background-color: white;
+}
+
+.gender-birthday-image{
+  display: flex;
+}
+.gender-birthday{
+  width: 50%;
+}
+
+.image-input-container {
+  max-width: 200px;
+  height: 300px; 
+  margin: 0 auto; 
+  flex: 1;
+  
+}
+
+.image-input-container label {
+  display: block;
+  position: relative; 
+  width: 78%;
+  height: 70%;
+  outline: 4px dashed #73787e; 
+  border-radius: 8px; 
+  background-size: cover; 
+  cursor: pointer;
+  background-color: rgb(48, 46, 46);
+  overflow: visible;
+}
+
+.image-input-container label::after {
+  content: '+'; 
+  position: absolute;
+  bottom: -13px;
+  right: -15px;
+  width: 30px; 
+  height: 30px;
+  background: rgb(214, 90, 255); 
+  border-radius: 50%; 
+  border: 2px solid white;
+  display: flex;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  color: white; 
+  font-size: 35px; 
+  transition: transform 0.3s ease; 
+}
+
+.image-input-container label:hover::after {
+  transform: rotate(90deg); 
+}
+
+
+.image-input-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  border-radius: 8px; 
 }
 
 
@@ -353,19 +414,25 @@ select.step1-input{
   width: 70%;
   text-align: center;
   font-family: monospace;
+  font-size: 20px;
 }
 
 .custom-subject-input input{
+  width: 80%;
+  padding: 10px;
+  border: 0.5px solid rgb(67, 63, 63); 
+  border-radius: 8px;
   background-color: black;
-  color: lightgray;
-  border: 0.5px solid lightgray;
-  border-radius: 0;
-  outline: none;
-  padding: 5px;
-  margin: 5px;
-  font-size: 20px;
+  font-size: 15px;
   font-family: monospace;
+  color: lightgray;
+  margin: 10px;
 
+}
+
+.custom-subject-input input:focus{
+  outline: none;
+  border: 1px solid rgb(255, 255, 255);
 }
 
 .picks{
@@ -402,11 +469,10 @@ select.step1-input{
   padding: 10px;
   border-radius: 20px;
   cursor: pointer;
-  border: 1px solid #ddd; 
+  border: 2px solid rgba(118, 115, 115, 0.5); 
   text-align: center;
   font-family: monospace;
   font-size: 15px;
-  border: 1px solid white;
   color: white;
   transition: background-color 0.5s ease-out;
 }
@@ -419,9 +485,7 @@ select.step1-input{
 }
 
 .subject-button:hover, .subject-tag:hover {
-  background-color: white;
-  transform: scale(1.1); 
-  color: black;
+  border: 1.5px solid white;
 }
 
 .subject-tag:hover{

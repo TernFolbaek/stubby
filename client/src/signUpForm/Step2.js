@@ -54,7 +54,7 @@ const Step2 = ({ setFormData, formData }) => {
       <div className='step-2-container text-mono text-[25px]'>
         <div className='selected-topics-count'></div>
         <h4 className='select-topics-text'>
-          Select a minimum of 3 topics of interest to show other users which
+          Submit a minimum of 3 topics of interest to show other users which
           areas you burn for:
         </h4>
         <div className='custom-subject-input'>

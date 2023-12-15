@@ -18,10 +18,10 @@ const Step1 = ({ setFormData, formData }) => {
   const handleChange = (e) => {
     const { name, type } = e.target;
     const value = type === 'file' ? e.target.files[0] : e.target.value;
-  
+
     if (name === 'birthday') {
       const age = calculateAge(value);
-      console.log(age)
+      console.log(age);
       setFormData({ ...formData, birthday: value, age });
     } else {
       setFormData({ ...formData, [name]: value });
@@ -61,19 +61,63 @@ const Step1 = ({ setFormData, formData }) => {
             />
           </div>
         </div>
-        {/* Institution of Studies */}
-        <div className='input-field'>
-          <label htmlFor='institution'>Institution of Studies</label>
-          <input
-            className='step1-input'
-            id='institution'
-            name='institution'
-            type='text'
-            placeholder='Institution'
-            value={formData.institution || ''}
-            onChange={handleChange}
-          />
+        <div className='gender-birthday-image'>
+          <div className='gender-birthday'>
+            {/* Gender */}
+            <div className='input-field w-[100%]'>
+              <label htmlFor='gender'>Gender</label>
+              <select
+                className='step1-input'
+                id='gender'
+                name='gender'
+                value={formData.gender || ''}
+                onChange={handleChange}
+                required
+              >
+                <option value=''>Select...</option>
+                <option value='male'>Man</option>
+                <option value='female'>Woman</option>
+                <option value='other'>Other</option>
+              </select>
+            </div>
+            {/* Birthday */}
+            <div className='input-field'>
+              <label htmlFor='birthday'>Birthday</label>
+              <input
+                className='step1-input cursor-pointer'
+                id='birthday'
+                name='birthday'
+                type='date'
+                value={formData.birthday || ''}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+          <div className='input-field image-input-container'>
+            <label htmlFor='profileImage'>
+              <input
+                className='hidden'
+                id='profileImage'
+                name='profileImage'
+                type='file'
+                accept='image/*' 
+                onChange={handleChange}
+                required
+              />
+              {formData.profileImage && (
+                <img
+                  src={URL.createObjectURL(formData.profileImage)}
+                  alt='Profile Preview'
+                  onLoad={() => URL.revokeObjectURL(formData.profileImage)} 
+                />
+              )}
+            </label>
+          </div>
         </div>
+      </div>
+
+      <div className='right-half w-full md:w-2/5 px-2 mb-6'>
         {/* Living Location */}
         <div className='input-field'>
           <label htmlFor='location'>Living Location</label>
@@ -87,45 +131,18 @@ const Step1 = ({ setFormData, formData }) => {
             onChange={handleChange}
           />
         </div>
+        {/* Institution of Studies */}
         <div className='input-field'>
-          <label htmlFor='profileImage'>Profile Image</label>
+          <label htmlFor='institution'>Institution of Studies</label>
           <input
             className='step1-input'
-            id='profileImage'
-            name='profileImage'
-            type='file'
-            accept='image/*' // Accepts all image formats
+            id='institution'
+            name='institution'
+            type='text'
+            placeholder='Institution'
+            value={formData.institution || ''}
             onChange={handleChange}
-            required
           />
-          {formData.profileImage && (
-            <img
-              src={URL.createObjectURL(formData.profileImage)}
-              alt='Profile Preview'
-              className='profile-image-preview'
-              onLoad={() => URL.revokeObjectURL(formData.profileImage)} // Clean up the object URL after loading
-            />
-          )}
-        </div>
-      </div>
-
-      <div className='right-half w-full md:w-2/5 px-2 mb-6'>
-        {/* Gender */}
-        <div className='input-field'>
-          <label htmlFor='gender'>Gender</label>
-          <select
-            className='step1-input'
-            id='gender'
-            name='gender'
-            value={formData.gender || ''}
-            onChange={handleChange}
-            required
-          >
-            <option value=''>Select...</option>
-            <option value='male'>Man</option>
-            <option value='female'>Woman</option>
-            <option value='other'>Other</option>
-          </select>
         </div>
         {/* LinkedIn Profile */}
         <div className='input-field'>
@@ -151,19 +168,6 @@ const Step1 = ({ setFormData, formData }) => {
             placeholder='Position'
             value={formData.position || ''}
             onChange={handleChange}
-          />
-        </div>
-        {/* Birthday */}
-        <div className='input-field'>
-          <label htmlFor='birthday'>Birthday</label>
-          <input
-            className='step1-input cursor-pointer'
-            id='birthday'
-            name='birthday'
-            type='date'
-            value={formData.birthday || ''}
-            onChange={handleChange}
-            required
           />
         </div>
       </div>
