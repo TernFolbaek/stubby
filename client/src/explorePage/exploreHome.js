@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Match from './Match';
-import { mdiHeartCircleOutline, mdiAlphaXCircleOutline } from '@mdi/js';
+import Match from '../home/Match';
+import { mdiHeartOutline, mdiChevronRight } from '@mdi/js';
 import Icon from '@mdi/react';
 
 const ExploreHome = () => {
@@ -16,6 +16,7 @@ const ExploreHome = () => {
     description: '',
     userImage: '',
     firstName: '',
+    email: '',
   });
   const [usersToExplore, setUsersToExplore] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -109,6 +110,7 @@ const ExploreHome = () => {
       } = response.data;
 
       const firstName = response.data.firstName?.replace(/"/g, '') || '';
+      const lastName = response.data.lastName?.replace(/"/g, '') || '';
 
       const imageDataUrl = userImage
         ? `data:${userImage.contentType};base64,${userImage.data}`
@@ -125,6 +127,7 @@ const ExploreHome = () => {
         description,
         userImage: imageDataUrl,
         firstName,
+        lastName,
       });
     } catch (error) {
       console.error('Error fetching user info:', error);
@@ -159,25 +162,45 @@ const ExploreHome = () => {
   return (
     <div className='explore-home-container'>
       <div className='explore-left'>
-        <div className='matches-messages'>
-          <div className='current-user'>
-            <img
-              src={userInfo.userImage}
-              alt={userInfo.username}
-              className='user-image'
-            />
-            <h4 className='bg-none'>{userInfo.firstName}</h4>
+        <div className='current-user'>
+          <img
+            src={userInfo.userImage}
+            alt={userInfo.username}
+            className='user-image'
+          />
+          <div className='current-user-info'>
+            <h4>
+              {userInfo.firstName} {userInfo.lastName}
+            </h4>
+            <h4 className='current-email'>{userInfo.email} </h4>
           </div>
+        </div>
+        <hr className='explore-hr' />
 
+        <div className='matches-messages-container relative bg-black rounded-full overflow-hidden cursor-pointer'>
+          <div
+            className={`slider-indicator rounded-full transition-all duration-300 ease-in-out`}
+            style={{
+              transform: `translateX(${
+                activeView === 'matches' ? '0' : '100%'
+              })`,
+            }}
+          ></div>
+
+          {/* Buttons */}
           <button
-            className={activeView === 'matches' ? 'active' : ''}
             onClick={() => setActiveViewWithStyle('matches')}
+            className={`toggle-button absolute w-1/2 top-0.5 ${
+              activeView === 'matches' ? 'text-white' : 'text-gray-400'
+            }`}
           >
             Matches
           </button>
           <button
-            className={activeView === 'messages' ? 'active' : ''}
             onClick={() => setActiveViewWithStyle('messages')}
+            className={`toggle-button absolute w-1/2 top-0.5 right-0 ${
+              activeView === 'messages' ? 'text-white' : 'text-gray-400'
+            }`}
           >
             Messages
           </button>
@@ -197,7 +220,7 @@ const ExploreHome = () => {
         <div className='study-mate-card-container'>
           {usersToExplore.length > 0 && currentIndex < usersToExplore.length ? (
             <div className='user-profile-card'>
-              <div className='user-card-left'>
+              <div className='user-card-top'>
                 <div className='user-info'>
                   <img
                     src={usersToExplore[currentIndex].userImage}
@@ -205,12 +228,14 @@ const ExploreHome = () => {
                     className='profile-image'
                   />
                 </div>
-                <h2>
-                  {usersToExplore[currentIndex].username},{' '}
-                  {usersToExplore[currentIndex].age}{' '}
-                </h2>
-                <h3>{usersToExplore[currentIndex].location}</h3>
-                <h3>{usersToExplore[currentIndex].institution}</h3>
+                <div className="user-information">
+                  <h2>
+                    {usersToExplore[currentIndex].username},{' '}
+                    {usersToExplore[currentIndex].age}{' '}
+                  </h2>
+                  <h3>{usersToExplore[currentIndex].location}</h3>
+                  <h3>{usersToExplore[currentIndex].institution}</h3>
+                </div>
               </div>
               <div className='user-card-right'>
                 <h2 className='user-card-title'>
@@ -238,29 +263,34 @@ const ExploreHome = () => {
           )}
         </div>
         <div className='interaction-buttons'>
-          <Icon
-            onClick={() =>
-              handleUserInteraction(true, usersToExplore[currentIndex]._id)
-            }
-            path={mdiHeartCircleOutline}
-            title='checkmark'
-            size={3}
-            horizontal
-            vertical
-            rotate={180}
-            className='yes'
-          />
-          <Icon
-            onClick={() => handleUserInteraction(false)}
-            path={mdiAlphaXCircleOutline}
-            title='checkmark'
-            size={3}
-            horizontal
-            vertical
-            rotate={180}
-            className='no'
-          />
-
+          <div className='like'>
+            <Icon
+              onClick={() =>
+                handleUserInteraction(true, usersToExplore[currentIndex]._id)
+              }
+              path={mdiHeartOutline}
+              title='like'
+              size={1.6}
+              horizontal
+              vertical
+              rotate={180}
+              className='like-icon'
+            />
+            <h3>Like</h3>
+          </div>
+          <div className='next'>
+            <Icon
+              onClick={() => handleUserInteraction(false)}
+              path={mdiChevronRight}
+              title='checkmark'
+              size={2}
+              horizontal
+              vertical
+              rotate={180}
+              className='next-icon'
+            />
+            <h3>Next</h3>
+          </div>
         </div>
       </div>
     </div>

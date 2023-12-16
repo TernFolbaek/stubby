@@ -12,7 +12,7 @@ const Home = () => {
       if (typedText.length < fullText.length) {
         setTimeout(() => {
           setTypedText(fullText.substring(0, typedText.length + 1));
-        }, 35);
+        }, 30);
       } else {
         setTyping(false);
       }
@@ -27,7 +27,7 @@ const Home = () => {
           {typedText}
           <span className='blinker'></span>
         </p>
-        <div className='mt-8 no-background button-container right-aligned-div'>
+        <div className='mt-8 no-background button-container right-aligned-div home-buttons'>
         <Link
             to='/signUp'
             className='button-signup hover:bg-transparent hover:text-purple-400 bg-purple-400 text-white font-bold py-2 px-10 border rounded-full mr-4 text-[17px] cursor-pointer transition duration-500'

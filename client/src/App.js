@@ -7,7 +7,7 @@ import Home from './home/home';
 import { Route, Switch } from 'wouter';
 import ProtectedRoute from './protected/protectedRoutes';
 import SignUpForm from './signUpForm/signUpForm';
-import ExploreHome from './home/exploreHome';
+import ExploreHome from './explorePage/exploreHome';
 
 const App = () => {
   return (

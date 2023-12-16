@@ -26,7 +26,7 @@ const SignUpForm = () => {
   });
 
   const handleNextStep = () => {
-    if (currentStep === 2 && formData.interests.length < 3) {
+    if (currentStep === 2 && formData.interests.length < 0) {
       alert('Please select at least 3 topics of interest.');
       return;
     }
