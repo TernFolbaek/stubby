@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Match from '../home/Match';
-import { mdiHeartOutline, mdiChevronRight } from '@mdi/js';
+import { mdiCardsHeartOutline, mdiChevronRight } from '@mdi/js';
 import Icon from '@mdi/react';
+import ExploreNavbar from './ExploreNavbar';
 
 const ExploreHome = () => {
   const [userInfo, setUserInfo] = useState({
@@ -217,8 +218,10 @@ const ExploreHome = () => {
       </div>
 
       <div className='explore-right'>
-        <div className='study-mate-card-container'>
-          {usersToExplore.length > 0 && currentIndex < usersToExplore.length ? (
+        <ExploreNavbar />
+
+        {usersToExplore.length > 0 && currentIndex < usersToExplore.length ? (
+          <div className='card-wrapper'>
             <div className='user-profile-card'>
               <div className='user-card-top'>
                 <div className='user-info'>
@@ -228,47 +231,68 @@ const ExploreHome = () => {
                     className='profile-image'
                   />
                 </div>
-                <div className="user-information">
-                  <h2>
-                    {usersToExplore[currentIndex].username},{' '}
-                    {usersToExplore[currentIndex].age}{' '}
+                <div className='user-information'>
+                  <h2 className='font-semibold'>
+                    {usersToExplore[currentIndex].username}{' '}
                   </h2>
-                  <h3>{usersToExplore[currentIndex].location}</h3>
-                  <h3>{usersToExplore[currentIndex].institution}</h3>
+                  <h3 className='font-light'>
+                    <span className='gray bg-inherit'>Age:</span>{' '}
+                    {usersToExplore[currentIndex].age}{' '}
+                  </h3>
+                  <h3 className='font-light'>
+                    <span className='gray bg-inherit'>Location:</span>{' '}
+                    {usersToExplore[currentIndex].location}
+                  </h3>
+                  <h3 className='font-light'>
+                    <span className='gray bg-inherit'>Establishment:</span>{' '}
+                    {usersToExplore[currentIndex].institution}
+                  </h3>
                 </div>
               </div>
-              <div className='user-card-right'>
-                <h2 className='user-card-title'>
-                  About {usersToExplore[currentIndex].username}
-                </h2>
+              <div className='user-card-bottom'>
+                <h3 className='user-card-title pb-2'>Subjects:</h3>
+                <div className='interest-card-container'>
+                  {usersToExplore[currentIndex].interests.map(
+                    (interest, index) => (
+                      <div className='user-interests' key={index}>
+                        {interest}
+                      </div>
+                    )
+                  )}
+                </div>
+
+                <h3 className='user-card-title py-5'>Description :</h3>
                 <div className='user-details'></div>
                 <div className='user-description'>
                   <p>{usersToExplore[currentIndex].description}</p>
                 </div>
-
-                <h3 className='user-card-title'>Subjects of interest:</h3>
-                <div className='interest-card-container'>
-                  {usersToExplore[currentIndex].interests.map(
-                    (interest, index) => (
-                      <li className='user-interests' key={index}>
-                        {interest}
-                      </li>
-                    )
-                  )}
-                </div>
               </div>
             </div>
-          ) : (
-            <div>No more users to explore</div>
-          )}
-        </div>
+
+            <div className='next-card-placeholder'></div>
+            <div>
+              {' '}
+              <Icon
+                onClick={() => handleUserInteraction(false)}
+                path={mdiChevronRight}
+                size={2}
+                horizontal
+                vertical
+                rotate={180}
+                className='next-card-icon'
+              />
+            </div>
+          </div>
+        ) : (
+          <div id='explore-end'>No more users to explore</div>
+        )}
         <div className='interaction-buttons'>
           <div className='like'>
             <Icon
               onClick={() =>
                 handleUserInteraction(true, usersToExplore[currentIndex]._id)
               }
-              path={mdiHeartOutline}
+              path={mdiCardsHeartOutline}
               title='like'
               size={1.6}
               horizontal
@@ -276,7 +300,7 @@ const ExploreHome = () => {
               rotate={180}
               className='like-icon'
             />
-            <h3>Like</h3>
+            <h3 className='font-medium'>Like</h3>
           </div>
           <div className='next'>
             <Icon
@@ -287,9 +311,9 @@ const ExploreHome = () => {
               horizontal
               vertical
               rotate={180}
-              className='next-icon'
+              className='next-icon gray'
             />
-            <h3>Next</h3>
+            <h3 className='gray font-medium'>Next</h3>
           </div>
         </div>
       </div>

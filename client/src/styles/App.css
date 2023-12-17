@@ -572,9 +572,10 @@ select.step1-input{
   flex-direction: column;
   height: 100%;
   width: 100%;
-  flex: 0.4;
+  flex: 0.3;
   overflow-x: hidden;
   background-color: #251E3E;
+  border-right: 0.6px solid #3B2E58;
 
 }
 
@@ -590,15 +591,14 @@ select.step1-input{
   flex: 1;
   height: 100%;
   width: 100%;
-  gap: 5px;
   flex-direction: column;
   background-color: rgb(33, 27, 54); 
   background-image: 
-    radial-gradient(circle at top left, rgba(183, 135, 245, 0.1), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(183, 135, 245, 0.1), transparent 30%);
+  radial-gradient(circle at top left, rgba(183, 135, 245, 0.1), transparent 30%),
+  radial-gradient(circle at bottom right, rgba(183, 135, 245, 0.1), transparent 30%);
   position: relative;
-  padding: 10px;
   overflow: hidden;
+
 }
 
 .explore-right h1{
@@ -608,11 +608,6 @@ select.step1-input{
   background-color: #F3F8FF;
   color: rgb(183, 135, 245);
   z-index: 1000;
-}
-
-.study-mate-card-container{
-  background: none;
-
 }
 
 .matches-messages-container {
@@ -667,21 +662,22 @@ select.step1-input{
   transform: translateX(100%);
 }
 
-
-
 .user-profile-card {
+  position: absolute;
+  top: -20px;
+  left: 50%; 
+  transform: translate(-50%);
   display: flex;
   flex-direction: column;
   border-radius: 10px;
   padding: 35px;
   margin-top: 80px;
-  margin-left: 50px;
-  width: 70%;
+  width: 60%;
   height: 500px;
   align-items: center;
   background-color: #251E3E;
   border: 2px solid #242444;
-
+  z-index: 1;
 }
 
 .user-info {
@@ -689,9 +685,10 @@ select.step1-input{
   flex-direction: row;
   align-items: center;
   background-color: #251E3E;
+  overflow: visible;
 }
 
-.user-card-left h2,h3,p{
+.user-card-top h2,h3,p{
   background-color: #251E3E;
 }
 
@@ -700,16 +697,21 @@ select.step1-input{
   background-color: #251E3E;
 }
 
+
+
 .user-card-top{
   display: flex;
+  gap: 5%;
+  width: 100%;
+  justify-content: start;
+  align-items: center;
   flex: 0.5;
   background-color: #251E3E;
-  border-right: 1px solid #ddd; 
-  padding-right: 10px
+  overflow: visible;
 
 }
 
-.user-card-right{
+.user-card-bottom{
   flex: 0.8;
   background-color: #251E3E;
   display: flex;
@@ -729,46 +731,57 @@ select.step1-input{
 }
 
 .profile-image {
-  width: 300px; 
-  height: 400px;
+  width: 200px; 
+  height: 200px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 3%;
 }
 
-.user-card-title{
-  margin-left: 20px;
-}
+
 
 .interest-card-container{
-  display: grid;
-  padding-left: 60px;
-  grid-template-columns: repeat(2, 1fr);
-  row-gap: 5px;
-  column-gap: 5px;
+  display: flex;
+  gap: 10px;
   background-color: #251E3E;
-  margin: 10px;
+  padding: 10px 0;
 
 }
 
 .user-interests{
-  background-color: #251E3E;
+  background-color: #3B2E58;
+  width: fit-content;
+  padding: 7px 15px;
+  border-radius: 25px;
 }
 
 .user-description {
   background-color: #251E3E;
   text-align: justify;
-  margin-left: 20px;
+  display: flex;
+  justify-content: start;
   padding-bottom: 20px;
+  line-height: 1.5;
+}
 
+.user-description p{
+  color: rgb(173, 172, 172);
+}
+
+.gray{
+  color: rgb(173, 172, 172);
 }
 
 .interaction-buttons {
   display: flex;
   justify-content: space-between;
   position: absolute;
-  bottom: 40px;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   width: fit-content;
-  background-color: inherit;
+  background-color: rgb(33, 27, 54); 
   gap: 20px;
 
 }
@@ -811,6 +824,13 @@ select.step1-input{
   padding: 5px 0;
 }
 
+.user-information{
+  background-color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .current-email{
   font-weight: 300;
   font-size: 15px;
@@ -819,7 +839,7 @@ select.step1-input{
 .current-user img{
   width: 90px;
   height: 90px;
-  border: 2px solid white;
+  border: 2px solid #3B2E58;
 }
 
 
@@ -863,33 +883,106 @@ select.step1-input{
   background-color: #7B00FE;
   border-radius: 10px;
   display: flex;
-  justify-content: start;
+  justify-content: space-around;
   align-items: center;
-  gap: 10px;
-  width: 120px;
-  padding: 10px 5px;
+  width: 100px;
+  padding: 10px 0;
+  padding-right: 10px;
   height: 30px;
 }
+
+
+.card-wrapper{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: inherit; 
+  background-image: inherit;
+}
+
+#explore-end{
+  background-color: inherit;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.next-card-icon{
+  width: fit-content;
+  height: auto;
+  position: absolute;
+  top: 45%;
+  right: 13.5%;
+  z-index: 4;
+  border-radius: 50%;
+  background-color: rgba(68, 58, 87, 0.3);
+  border: 2px solid #242444;
+  padding: 2px;
+}
+
+.next-card-icon:hover{
+  background-color: rgba(68, 58, 87, 0.7);
+  cursor: pointer;
+
+}
+
+.next-card-placeholder {
+  position: absolute;
+  top: 0;
+  left: 50%; 
+  transform: translate(-20%, 13%);
+  right: -10px; 
+  width: 43%; 
+  height: 75%; 
+  z-index: 0; 
+  border: 2px solid #242444;
+  background-color: #251E3E;
+  border-radius: 10px;
+}
+
 
 .next{
   cursor: pointer;
-  color: white;
   background-color: inherit;
   border-radius: 10px;
   display: flex;
-  justify-content: start;
+  justify-content: space-around;
   align-items: center;
-  width: 120px;
-  padding: 10px 5px;
+  width: 100px;
+  padding: 10px 0;
+  padding-right: 15px;
   height: 30px;
   border: 2px solid #242444;
 }
+
+.navbarStyle{
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  align-items: center;
+  height: 55px;
+  width: 100%;
+  background-color: #251E3E;
+  padding: 0 10px; 
+};
+
+.next:hover .next-icon{
+  color: white;
+}
+
+.next:hover{
+  border-color: lightgray;
+}
+
 .like-icon{
   background-color: inherit;
 }
+
 .like:hover .like-icon{
 
 }
+
 .next-icon{
   background-color: inherit;
 }
@@ -897,11 +990,6 @@ select.step1-input{
 .like h3{
   background-color: #7B00FE;
 }
-
-
-
-
-
 
 .three-dots-icon {
   transition: transform 0.3s ease; 
@@ -912,16 +1000,16 @@ select.step1-input{
 }
 
 .modal {
-  position: fixed; /* Fixed position */
+  position: fixed; 
   top: 0;
   left: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
+  width: 100%; 
+  height: 100%; 
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  z-index: 1000; /* High z-index to be on top */
+  justify-content: center; 
+  align-items: center; 
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1000; 
 }
 
 @keyframes fadeInScaleUp {

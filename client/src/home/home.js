@@ -22,7 +22,7 @@ const Home = () => {
   return (
     <div className='background-hero min-h-screen bg-no-repeat bg-cover bg-center'>
       <div className='text-right p-20 right-aligned-div '>
-        <h1 className='text-5xl font-bold text-[80px] no-background italic'>Stubby</h1>
+        <h1 className='text-5xl font-bold text-[80px] no-background italic p-7 '>Stubby</h1>
         <p className='text-xl mt-4 text-[60px] font-mono no-background'>
           {typedText}
           <span className='blinker'></span>
