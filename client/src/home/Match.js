@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useLocation } from 'wouter';
 
 const Match = ({ matchId }) => {
   const [matchInfo, setMatchInfo] = useState(null);
+  const [, navigate] = useLocation();
 
+
+  const goToMatchDetail = () => {
+    navigate(`/match/${matchId}`);
+  };
   useEffect(() => {
     const fetchMatchInfo = async () => {
       try {
@@ -59,13 +65,14 @@ const Match = ({ matchId }) => {
   if (!matchInfo) return <div>Loading...</div>;
 
   return (
-    <div className='match'>
+    <div className='match' onClick={goToMatchDetail}>
       <img
         src={matchInfo.userImage}
         alt={`${matchInfo.firstName} ${matchInfo.lastName}`}
         className='match-image'
       />
       <div className='match-name'>{`${matchInfo.firstName} ${matchInfo.lastName}`}</div>
+
     </div>
   );
 };

@@ -137,23 +137,27 @@ const ExploreHome = () => {
   };
 
   const handleUserInteraction = async (liked, likedUserId) => {
-    console.log(likedUserId);
-    if (liked) {
-      try {
-        const userId = localStorage.getItem('userId');
+    const cardElement = document.querySelector('.user-profile-card');
+    if (cardElement) {
+      cardElement.classList.add('fade-out-animation');
 
-        await axios.post(`/api/profile/like`, {
-          userId: userId,
-          likedUserId: likedUserId,
-        });
-
-        console.log(`Liked user with ID: ${likedUserId}`);
-      } catch (error) {
-        console.error('Error updating likes:', error);
+      if (liked) {
+        try {
+          const userId = localStorage.getItem('userId');
+          await axios.post(`/api/profile/like`, {
+            userId: userId,
+            likedUserId: likedUserId,
+          });
+          console.log(`Liked user with ID: ${likedUserId}`);
+        } catch (error) {
+          console.error('Error updating likes:', error);
+        }
       }
+      setTimeout(() => {
+        setCurrentIndex(currentIndex + 1);
+        cardElement.classList.remove('fade-out-animation');
+      }, 500);
     }
-
-    setCurrentIndex(currentIndex + 1);
   };
 
   const setActiveViewWithStyle = (view) => {
@@ -287,14 +291,16 @@ const ExploreHome = () => {
           <div id='explore-end'>No more users to explore</div>
         )}
         <div className='interaction-buttons'>
-          <div className='like'>
+          <div
+            className='like'
+            onClick={() =>
+              handleUserInteraction(true, usersToExplore[currentIndex]._id)
+            }
+          >
             <Icon
-              onClick={() =>
-                handleUserInteraction(true, usersToExplore[currentIndex]._id)
-              }
               path={mdiCardsHeartOutline}
               title='like'
-              size={1.6}
+              size={1.1}
               horizontal
               vertical
               rotate={180}
@@ -302,12 +308,11 @@ const ExploreHome = () => {
             />
             <h3 className='font-medium'>Like</h3>
           </div>
-          <div className='next'>
+          <div className='next' onClick={() => handleUserInteraction(false)}>
             <Icon
-              onClick={() => handleUserInteraction(false)}
               path={mdiChevronRight}
               title='checkmark'
-              size={2}
+              size={1.5}
               horizontal
               vertical
               rotate={180}

@@ -1,66 +1,3 @@
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-*{
-  margin: 0;
-  padding: 0;
-  background-color: rgb(25,26,31);
-  overflow-y: hidden;
-  user-select: none;
-}
-
-body, html {
-  margin: 0;
-  padding: 0;
-}
-a{
-  text-decoration: none;
-  color: inherit;
-}
-
-/* ANIMATIONS */
-.blinker {
-  display: inline-block;
-  vertical-align: relative;
-  height: 20px;
-  width: 3px;
-  background-color: white;
-  animation: blink-animation 1s step-start infinite;
-}
-
-@keyframes blink-animation {
-  50% {
-    background-color: transparent;
-  }
-}
-
-
-
-
-/* HELPER CLASSES */
-
-.button-container{
-  display: flex;
-  gap: 10%;
-}
-
-.custom-hr{
-  width: 80%;
-}
-
-.button-signup, .button-login{
-  border: 2px solid rgba(131, 69, 203, 0.5);
-}
-.flex-col{
-  display: flex;
-  flex-direction: column;
-
-}
-
-.link{
-  color: blue;
-}
-
 /* CONTAINER */
 .full-width-container{
   display: flex;
@@ -574,14 +511,14 @@ select.step1-input{
   width: 100%;
   flex: 0.3;
   overflow-x: hidden;
-  background-color: #251E3E;
-  border-right: 0.6px solid #3B2E58;
+  background-color: #161616;
+  border-right: 1px solid #2D2D2D;
 
 }
 
 .explore-hr{
   width: 100%;
-  border: 0.5px solid #3B2E58;
+  border: 0.5px solid #2D2D2D;
 }
 
 .explore-right {
@@ -592,10 +529,10 @@ select.step1-input{
   height: 100%;
   width: 100%;
   flex-direction: column;
-  background-color: rgb(33, 27, 54); 
+  background-color: #161616; 
   background-image: 
-  radial-gradient(circle at top left, rgba(183, 135, 245, 0.1), transparent 30%),
-  radial-gradient(circle at bottom right, rgba(183, 135, 245, 0.1), transparent 30%);
+  radial-gradient(circle at top left, rgba(176, 175, 178, 0.1), transparent 30%),
+  radial-gradient(circle at bottom right, rgba(176, 175, 178, 0.1), transparent 30%);
   position: relative;
   overflow: hidden;
 
@@ -615,7 +552,7 @@ select.step1-input{
   width: 70%; 
   padding: 3px;
   height: 30px; 
-  background-color: #251E3E; 
+  background-color: #161616; 
   border-radius: 20px; 
   border: 1px solid rgba(81, 77, 77, 0.5);
 
@@ -626,7 +563,7 @@ select.step1-input{
   height: 100%;
   transition: all 0.3s ease;
   z-index: 0;
-  background-color: #3B2E58;
+  background-color: #373737;
 }
 
 .toggle-button {
@@ -672,11 +609,11 @@ select.step1-input{
   border-radius: 10px;
   padding: 35px;
   margin-top: 80px;
-  width: 60%;
+  width: 50%;
   height: 500px;
   align-items: center;
-  background-color: #251E3E;
-  border: 2px solid #242444;
+  background-color: #161616;
+  border: 2px solid #272727;
   z-index: 1;
 }
 
@@ -684,17 +621,17 @@ select.step1-input{
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: #251E3E;
+  background-color: #161616;
   overflow: visible;
 }
 
 .user-card-top h2,h3,p{
-  background-color: #251E3E;
+  background-color: #161616;
 }
 
 .user-details {
   margin-left: 20px;
-  background-color: #251E3E;
+  background-color: #161616;
 }
 
 
@@ -706,14 +643,14 @@ select.step1-input{
   justify-content: start;
   align-items: center;
   flex: 0.5;
-  background-color: #251E3E;
+  background-color: #161616;
   overflow: visible;
 
 }
 
 .user-card-bottom{
   flex: 0.8;
-  background-color: #251E3E;
+  background-color: #161616;
   display: flex;
   margin-top: 25px;
   flex-direction: column;
@@ -726,7 +663,7 @@ select.step1-input{
 }
 
 .user-card-right h2{
-  background-color: #251E3E;
+  background-color: #161616;
   
 }
 
@@ -742,20 +679,20 @@ select.step1-input{
 .interest-card-container{
   display: flex;
   gap: 10px;
-  background-color: #251E3E;
+  background-color: #161616;
   padding: 10px 0;
 
 }
 
 .user-interests{
-  background-color: #3B2E58;
+  background-color: #202020;
   width: fit-content;
   padding: 7px 15px;
   border-radius: 25px;
 }
 
 .user-description {
-  background-color: #251E3E;
+  background-color: #161616;
   text-align: justify;
   display: flex;
   justify-content: start;
@@ -781,7 +718,7 @@ select.step1-input{
   margin-left: auto;
   margin-right: auto;
   width: fit-content;
-  background-color: rgb(33, 27, 54); 
+  background-color: #161616; 
   gap: 20px;
 
 }
@@ -820,7 +757,7 @@ select.step1-input{
 }
 
 .current-user-info h4{
-  background-color: #251E3E;
+  background-color: #161616;
   padding: 5px 0;
 }
 
@@ -845,26 +782,22 @@ select.step1-input{
 
 
 .explore {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 10px;
-  background-color: #251E3E;
+  background-color: #161616;
   padding: 20px;
 
 }
 
 .match-image {
-  width: 100%;
-  height: 140px;
+  width: 90px;
+  height: 90px;
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 50%;
 }
 
 .match-name {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   color: white;
   text-align: center;
   padding: 5px;
@@ -872,7 +805,7 @@ select.step1-input{
 }
 
 .match {
-  position: relative;
+  display: flex;
   border-radius: 10px;
 }
 
@@ -886,7 +819,7 @@ select.step1-input{
   justify-content: space-around;
   align-items: center;
   width: 100px;
-  padding: 10px 0;
+  padding: 4px 0;
   padding-right: 10px;
   height: 30px;
 }
@@ -913,11 +846,11 @@ select.step1-input{
   height: auto;
   position: absolute;
   top: 45%;
-  right: 13.5%;
+  right: 18%;
   z-index: 4;
   border-radius: 50%;
   background-color: rgba(68, 58, 87, 0.3);
-  border: 2px solid #242444;
+  border: 2px solid #272727;
   padding: 2px;
 }
 
@@ -930,14 +863,13 @@ select.step1-input{
 .next-card-placeholder {
   position: absolute;
   top: 0;
-  left: 50%; 
+  left: 36%; 
   transform: translate(-20%, 13%);
-  right: -10px; 
-  width: 43%; 
+  width: 56%; 
   height: 75%; 
   z-index: 0; 
-  border: 2px solid #242444;
-  background-color: #251E3E;
+  border: 2px solid #272727;
+  background-color: #161616;
   border-radius: 10px;
 }
 
@@ -950,20 +882,46 @@ select.step1-input{
   justify-content: space-around;
   align-items: center;
   width: 100px;
-  padding: 10px 0;
+  padding: 4px 0;
   padding-right: 15px;
   height: 30px;
-  border: 2px solid #242444;
+  border: 2px solid #272727;
+}
+
+.explore-nav{
+  background-color: #171717;
+  border-bottom: 1.5px solid #2D2D2D;
+}
+
+.explore-nav h3{
+  padding: 10px;
+  background-color: #171717;
+
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-out-animation {
+  animation-name: fadeOut;
+  animation-duration: 0.5s; /* Adjust duration as needed */
+  animation-fill-mode: forwards; /* Keeps the element in the end state of the animation */
 }
 
 .navbarStyle{
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 20px;
   align-items: center;
   height: 55px;
   width: 100%;
-  background-color: #251E3E;
+  background-color: #171717;
   padding: 0 10px; 
 };
 
@@ -1012,28 +970,7 @@ select.step1-input{
   z-index: 1000; 
 }
 
-@keyframes fadeInScaleUp {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 
-.modal-content {
-  width: 20%; 
-  padding: 20px;
-  background: white; 
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-  z-index: 1001; 
-  animation: fadeInScaleUp 0.5s ease-out forwards; 
-
-
-}
 
 .close {
   position: absolute;

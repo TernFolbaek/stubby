@@ -1,0 +1,38 @@
+@keyframes fadeInScaleUp {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .modal-content {
+    width: 20%; 
+    padding: 20px;
+    background: white; 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    z-index: 1001; 
+    animation: fadeInScaleUp 0.5s ease-out forwards; 
+  
+  
+  }
+
+  /* ANIMATIONS */
+.blinker {
+    display: inline-block;
+    vertical-align: relative;
+    height: 20px;
+    width: 3px;
+    background-color: white;
+    animation: blink-animation 1s step-start infinite;
+}
+
+@keyframes blink-animation {
+50% {
+    background-color: transparent;
+}
+}

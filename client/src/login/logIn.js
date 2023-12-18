@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import '../styles/App.css';
+import '../styles/base.css';
+import '../styles/components.css';
+import '../styles/helpers.css';
+import '../styles/animations.css';
+
+
+
 import googleIcon from '../images/google.png';
 import axios from 'axios';
 import { Link, useLocation } from 'wouter';
