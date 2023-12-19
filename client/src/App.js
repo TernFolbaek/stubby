@@ -1,8 +1,10 @@
 import React from 'react';
-import './styles/App.css';
 import './styles/animations.css';
 import './styles/base.css';
 import './styles/components.css';
+import './styles/helpers.css';
+import './styles/App.css';
+
 
 import Navbar from './navbar/logInNavbar';
 import LogIn from './login/logIn';

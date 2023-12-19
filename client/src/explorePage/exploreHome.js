@@ -4,6 +4,7 @@ import Match from '../home/Match';
 import { mdiCardsHeartOutline, mdiChevronRight } from '@mdi/js';
 import Icon from '@mdi/react';
 import ExploreNavbar from './ExploreNavbar';
+import MatchDetail from '../home/OpenMatch';
 
 const ExploreHome = () => {
   const [userInfo, setUserInfo] = useState({
@@ -22,6 +23,8 @@ const ExploreHome = () => {
   const [usersToExplore, setUsersToExplore] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeView, setActiveView] = useState('matches');
+  const [showMatchDetails, setShowMatchDetails] = useState(false);
+  const [selectedMatchId, setSelectedMatchId] = useState(null);
 
   useEffect(() => {
     fetchUserInfo();
@@ -136,6 +139,15 @@ const ExploreHome = () => {
     console.log('image', userInfo.userImage);
   };
 
+  const handleMatchSelect = (selectedId) => {
+    setShowMatchDetails(true);
+    setSelectedMatchId(selectedId);
+  };
+
+  const handleExploreNavbarClick = () => {
+    setShowMatchDetails(false);
+  };
+
   const handleUserInteraction = async (liked, likedUserId) => {
     const cardElement = document.querySelector('.user-profile-card');
     if (cardElement) {
@@ -214,7 +226,7 @@ const ExploreHome = () => {
         {activeView === 'matches' && (
           <div className='explore'>
             {userInfo.matches.map((matchId, index) => (
-              <Match key={index} matchId={matchId} />
+              <Match key={index} matchId={matchId} onSelectMatch={handleMatchSelect} />
             ))}
           </div>
         )}
@@ -223,8 +235,10 @@ const ExploreHome = () => {
 
       <div className='explore-right'>
         <ExploreNavbar />
-
-        {usersToExplore.length > 0 && currentIndex < usersToExplore.length ? (
+        {showMatchDetails ? (
+          <MatchDetail matchId={selectedMatchId} />
+        ) : usersToExplore.length > 0 &&
+          currentIndex < usersToExplore.length ? (
           <div className='card-wrapper'>
             <div className='user-profile-card'>
               <div className='user-card-top'>

@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useLocation } from 'wouter';
 
-const Match = ({ matchId }) => {
+const Match = ({ matchId, onSelectMatch }) => {
   const [matchInfo, setMatchInfo] = useState(null);
-  const [, navigate] = useLocation();
 
 
   const goToMatchDetail = () => {
-    navigate(`/match/${matchId}`);
+    onSelectMatch(matchId); 
   };
+  
   useEffect(() => {
     const fetchMatchInfo = async () => {
       try {
@@ -38,6 +37,14 @@ const Match = ({ matchId }) => {
           }
         }
 
+        const truncateDescription = (description) => {
+          const words = description.split(/\s+/);
+          if (words.length > 20) {
+            return words.slice(0, 13).join(' ') + '...';
+          }
+          return description;
+        };
+
         const institution = user.institution?.replace(/"/g, '') || '';
         const location = user.location?.replace(/"/g, '') || '';
         const description = user.description?.replace(/"/g, '') || '';
@@ -50,7 +57,7 @@ const Match = ({ matchId }) => {
           interests: interestsArray,
           institution,
           location,
-          description,
+          description: truncateDescription(description),
           firstName,
           lastName,
         });
@@ -71,7 +78,10 @@ const Match = ({ matchId }) => {
         alt={`${matchInfo.firstName} ${matchInfo.lastName}`}
         className='match-image'
       />
-      <div className='match-name'>{`${matchInfo.firstName} ${matchInfo.lastName}`}</div>
+      <div className="match-text">
+        <div className='match-name'>{`${matchInfo.firstName} ${matchInfo.lastName}`}</div>
+        <div className='match-description'>{`${matchInfo.description}`}</div>
+      </div>
 
     </div>
   );
