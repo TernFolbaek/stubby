@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Match from '../home/Match';
-import { mdiCardsHeartOutline, mdiChevronRight } from '@mdi/js';
+import {
+  mdiCardsHeartOutline,
+  mdiChevronRight,
+  mdiMessageReplyOutline,
+} from '@mdi/js';
 import Icon from '@mdi/react';
 import ExploreNavbar from './ExploreNavbar';
 import MatchDetail from '../home/OpenMatch';
+import Message from './Message';
 
 const ExploreHome = () => {
   const [userInfo, setUserInfo] = useState({
@@ -25,6 +30,8 @@ const ExploreHome = () => {
   const [activeView, setActiveView] = useState('matches');
   const [showMatchDetails, setShowMatchDetails] = useState(false);
   const [selectedMatchId, setSelectedMatchId] = useState(null);
+  const [currentRightView, setCurrentRightView] = useState('default');
+
 
   useEffect(() => {
     fetchUserInfo();
@@ -142,10 +149,15 @@ const ExploreHome = () => {
   const handleMatchSelect = (selectedId) => {
     setShowMatchDetails(true);
     setSelectedMatchId(selectedId);
+    setCurrentRightView('matchDetail');
   };
 
   const handleExploreNavbarClick = () => {
     setShowMatchDetails(false);
+  };
+
+  const handleMessageClick = () => {
+    setCurrentRightView('message');
   };
 
   const handleUserInteraction = async (liked, likedUserId) => {
@@ -226,7 +238,11 @@ const ExploreHome = () => {
         {activeView === 'matches' && (
           <div className='explore'>
             {userInfo.matches.map((matchId, index) => (
-              <Match key={index} matchId={matchId} onSelectMatch={handleMatchSelect} />
+              <Match
+                key={index}
+                matchId={matchId}
+                onSelectMatch={handleMatchSelect}
+              />
             ))}
           </div>
         )}
@@ -235,8 +251,17 @@ const ExploreHome = () => {
 
       <div className='explore-right'>
         <ExploreNavbar />
-        {showMatchDetails ? (
-          <MatchDetail matchId={selectedMatchId} />
+        {currentRightView === 'matchDetail' ? (
+          <div>
+            <MatchDetail matchId={selectedMatchId} />
+            <div className='message-button' onClick={handleMessageClick}>
+              <h4>Message</h4>
+              <Icon className='message-icon' path={mdiMessageReplyOutline} size={1} />
+            </div>
+          </div>
+            ) : currentRightView === 'message' ? (
+              <Message matchId={selectedMatchId} />
+
         ) : usersToExplore.length > 0 &&
           currentIndex < usersToExplore.length ? (
           <div className='card-wrapper'>
@@ -300,41 +325,44 @@ const ExploreHome = () => {
                 className='next-card-icon'
               />
             </div>
+            <div className='interaction-buttons'>
+              <div
+                className='like'
+                onClick={() =>
+                  handleUserInteraction(true, usersToExplore[currentIndex]._id)
+                }
+              >
+                <Icon
+                  path={mdiCardsHeartOutline}
+                  title='like'
+                  size={1.1}
+                  horizontal
+                  vertical
+                  rotate={180}
+                  className='like-icon'
+                />
+                <h3 className='font-medium'>Like</h3>
+              </div>
+              <div
+                className='next'
+                onClick={() => handleUserInteraction(false)}
+              >
+                <Icon
+                  path={mdiChevronRight}
+                  title='checkmark'
+                  size={1.5}
+                  horizontal
+                  vertical
+                  rotate={180}
+                  className='next-icon gray'
+                />
+                <h3 className='gray font-medium'>Next</h3>
+              </div>
+            </div>
           </div>
         ) : (
           <div id='explore-end'>No more users to explore</div>
         )}
-        <div className='interaction-buttons'>
-          <div
-            className='like'
-            onClick={() =>
-              handleUserInteraction(true, usersToExplore[currentIndex]._id)
-            }
-          >
-            <Icon
-              path={mdiCardsHeartOutline}
-              title='like'
-              size={1.1}
-              horizontal
-              vertical
-              rotate={180}
-              className='like-icon'
-            />
-            <h3 className='font-medium'>Like</h3>
-          </div>
-          <div className='next' onClick={() => handleUserInteraction(false)}>
-            <Icon
-              path={mdiChevronRight}
-              title='checkmark'
-              size={1.5}
-              horizontal
-              vertical
-              rotate={180}
-              className='next-icon gray'
-            />
-            <h3 className='gray font-medium'>Next</h3>
-          </div>
-        </div>
       </div>
     </div>
   );

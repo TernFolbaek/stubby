@@ -617,6 +617,23 @@ select.step1-input{
   border: 2px solid #272727;
   z-index: 1;
 }
+.user-profile-card-match {
+  position: absolute;
+  top: 20px;
+  left: 50%; 
+  transform: translate(-50%);
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 35px;
+  margin-top: 80px;
+  width: 50%;
+  height: 500px;
+  align-items: center;
+  background-color: #161616;
+  border: 2px solid #272727;
+  z-index: 1;
+}
 
 .user-info {
   display: flex;
@@ -675,7 +692,40 @@ select.step1-input{
   border-radius: 3%;
 }
 
+.message-button{
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #7B00FE;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  padding: 4px 6px;
+  height: 30px;
+  border: 1.5px solid #272727;
+  border-radius: 10px;
+  cursor: pointer;
+  gap: 5px;
+}
 
+.message-button h4{
+  background-color: inherit;
+  padding-bottom: 3px;
+  font-weight: normal;
+
+}
+
+.message-button:hover{
+  border: 1.5px solid white;
+}
+
+.message-icon{
+  background-color: inherit;
+}
 
 .interest-card-container{
   display: flex;

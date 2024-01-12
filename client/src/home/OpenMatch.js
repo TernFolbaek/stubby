@@ -54,13 +54,14 @@ const MatchDetail = ({ matchId }) => {
         const lastName = response.data.lastName?.replace(/"/g, '') || '';
         const cleanedLocation = location?.replace(/"/g, '') || '';
         const cleanedDescription = description?.replace(/"/g, '') || '';
-    
+        const institution = response.data.institution?.replace(/"/g, '') || '';
+
         setUserInfo({
           username,
           email,
           location: cleanedLocation,
           age,
-          school,
+          institution,
           interests: interestsArray,
           likes,
           matches,
@@ -81,7 +82,7 @@ const MatchDetail = ({ matchId }) => {
 
 
   return (
-    <div className='user-profile-card'>
+    <div className='user-profile-card-match'>
               <div className='user-card-top'>
                 <div className='user-info'>
                   <img

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 
 const Step1 = ({ setFormData, formData }) => {
   const calculateAge = (birthday) => {
@@ -17,16 +18,33 @@ const Step1 = ({ setFormData, formData }) => {
 
   const handleChange = (e) => {
     const { name, type } = e.target;
-    const value = type === 'file' ? e.target.files[0] : e.target.value;
+    let value = e.target.value;
 
-    if (name === 'birthday') {
-      const age = calculateAge(value);
-      console.log(age);
-      setFormData({ ...formData, birthday: value, age });
+    if (type === 'file') {
+      const file = e.target.files[0];
+      if (file) {
+        value = file;
+        const imageURL = URL.createObjectURL(file);
+        setFormData({ ...formData, [name]: value, profileImageUrl: imageURL });
+      }
     } else {
-      setFormData({ ...formData, [name]: value });
+      if (name === 'birthday') {
+        const age = calculateAge(value);
+        setFormData({ ...formData, birthday: value, age });
+      } else {
+        setFormData({ ...formData, [name]: value });
+      }
     }
   };
+
+  useEffect(() => {
+    return () => {
+      if (formData.profileImageUrl) {
+        URL.revokeObjectURL(formData.profileImageUrl);
+      }
+    };
+  }, [formData.profileImageUrl]);
+  
   return (
     <div className='form-container text-mono text-[20px] bg-dark'>
       <div className='left-half w-full md:w-2/5 px-2 mb-6 flex-col bg-dark'>
