@@ -1,9 +1,9 @@
 const express = require('express');
-const http = require('http');
-const socketIo = require('socket.io');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
+const socketIo = require('socket.io');
+const http = require('http');
 
 // Create Express app
 const app = express();
@@ -16,6 +16,26 @@ const corsOptions = {
   allowedHeaders: ['Content-Type'],
 };
 app.use(cors(corsOptions));
+
+const server = http.createServer(app);
+const io = socketIo(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST']
+  }
+});
+
+io.on('connection', (socket) => {
+  console.log('New client connected');
+
+  socket.on('sendMessage', (message) => {
+    io.emit('receiveMessage', message);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+});
 
 // MongoDB connection
 mongoose.set('strictQuery', false);
@@ -34,38 +54,6 @@ app.use('/api/explore', explorationRoutes);
 app.use('/api/messages', messageRoutes);
 
 // Create a server instance using http
-const server = http.createServer(app);
-
-// Attach socket.io to the server with CORS configuration
-const io = socketIo(server, {
-  cors: {
-    origin: 'http://localhost:3000', // Client URL
-    methods: ['GET', 'POST']
-  }
-});
-
-io.on('connection', (socket) => {
-  console.log('New client connected');
-
-
-  socket.on('joinRoom', (roomId) => {
-    socket.join(roomId);
-    console.log(`User ${socket.id} joined room ${roomId}`);
-
-  });
-
-  socket.on('sendMessage', ({ roomId, message }) => {
-    console.log('Received message:', message);
-    console.log(`Broadcasting message to room ${roomId}`);
-    io.to(roomId).emit('message', message);
-  });
-
-  socket.on('disconnect', () => {
-    console.log('Client disconnected');
-  });
-});
-
-
 
 const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
