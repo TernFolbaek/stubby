@@ -98,6 +98,11 @@ const ExploreHome = () => {
     }
   };
 
+  const showExplorePage = () => {
+    console.log('set right view to matches')
+    setCurrentRightView('matches'); 
+  };
+
   const fetchUserInfo = async () => {
     const userId = localStorage.getItem('userId');
     if (!userId) {
@@ -250,7 +255,7 @@ const ExploreHome = () => {
       </div>
 
       <div className='explore-right'>
-        <ExploreNavbar />
+        <ExploreNavbar  onExploreClick={showExplorePage}/>
         {currentRightView === 'matchDetail' ? (
           <div>
             <MatchDetail matchId={selectedMatchId} />

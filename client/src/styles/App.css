@@ -727,6 +727,188 @@ select.step1-input{
   background-color: inherit;
 }
 
+.message-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: #161616; 
+  background-image: 
+  radial-gradient(circle at top left, rgba(176, 175, 178, 0.1), transparent 30%),
+  radial-gradient(circle at bottom right, rgba(176, 175, 178, 0.1), transparent 30%);
+}
+
+.message-subcontainer{
+  height: 95%;
+  width: 95%;  
+  background-color: #161616; 
+  margin: auto;
+  border: 2px solid #2D2D2D;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.message-list {
+  overflow-y: auto;
+  width: 100%;
+  height: 90%;
+  padding: 10px;
+  background-color: inherit;
+  box-sizing: border-box;
+
+}
+
+.match-info {
+  background-color: #252525;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 5px;
+}
+
+.dots-vertical{
+  margin-left: auto;
+  padding: 5px;
+  margin-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: rgba(255,255,255,0.1);
+}
+
+.send-button{
+  background-color: #7B00FE;
+  margin-left: auto;
+  padding: 5px;
+  margin-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.match-info h2{
+  background-color: inherit;
+}
+
+.message-sent, .message-received {
+  display: block;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 60%;
+  width: fit-content;
+  word-break: break-word;
+}
+
+.message-sent {
+  color: white;
+  justify-content: end;
+  margin-left: auto; 
+  margin-right: 10px;
+  background-color: rgb(81, 178, 237);
+}
+
+.active-status {
+  color: rgb(5, 185, 5);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.inactive-status {
+  color: gray;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 17px; 
+  right: 10px;
+  border: 2px solid white;
+  transform: translate(50%, 50%);
+}
+
+.status-dot.active {
+  background-color: rgb(6, 180, 6);
+}
+
+.status-dot.inactive {
+  background-color: gray;
+}
+
+.user-image-message-container {
+  border-radius: 50%; 
+  object-fit: cover;
+  background: none;
+  position: relative; 
+  display: inline-block;
+  overflow: visible;
+}
+
+.user-image-message {
+  width: 50px; 
+  height: 50px; 
+  margin: 10px 0 10px 10px;
+  border-radius: 50%; 
+  object-fit: cover;
+  background: none;
+  border: 1px solid white;
+}
+
+.active-status, .inactive-status {
+  margin-top: 5px;
+  background-color: inherit;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: lighter;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  background-color: inherit;
+}
+.message-input{
+  background-color: #131313;
+  display: flex; 
+  padding: 10px; 
+  border-top: 2px solid #2D2D2D;
+  height: 50px;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+}
+
+.message-send{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid #2D2D2D;
+  width: 100%;
+  background-color: #2B2B2B;
+  border-radius: 5px;
+}
+
+.message-input input{
+  background-color: inherit;
+  width: 95%;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 15px;
+  padding: 0px 10px;
+
+}
+
+.message-received {
+  color: black;
+  align-self: flex-start;
+  background-color: white;
+
+}
+
+
 .interest-card-container{
   display: flex;
   gap: 10px;
@@ -796,6 +978,10 @@ select.step1-input{
   object-fit: cover;
   background: none;
 }
+
+
+
+
 
 
 .current-user{

@@ -25,14 +25,38 @@ const io = socketIo(server, {
   }
 });
 
+const ACTIVE_CHECK_INTERVAL = 20000; // 20 seconds
+
+// Update and broadcast user status periodically
+setInterval(() => {
+  io.emit('allUsersStatus', userStatus);
+}, ACTIVE_CHECK_INTERVAL);
+
+
+const userStatus = {};
+
 io.on('connection', (socket) => {
   console.log('New client connected');
+  
+  socket.emit('allUsersStatus', userStatus);
+
+  // Register user as online
+  socket.on('register', ({ userId }) => {
+    userStatus[userId] = true;
+    socket.userId = userId;
+    // Emit user status to other users
+    socket.broadcast.emit('userStatusUpdate', { userId, isActive: true });
+  });
 
   socket.on('sendMessage', (message) => {
     io.emit('receiveMessage', message);
   });
 
   socket.on('disconnect', () => {
+    if (socket.userId) {
+      userStatus[socket.userId] = false;
+      io.emit('userStatusUpdate', { userId: socket.userId, isActive: false });
+    }
     console.log('Client disconnected');
   });
 });
@@ -53,7 +77,6 @@ app.use('/api/profile', profileRoutes);
 app.use('/api/explore', explorationRoutes);
 app.use('/api/messages', messageRoutes);
 
-// Create a server instance using http
 
 const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
