@@ -16,6 +16,10 @@ const Message = ({ matchId }) => {
     userImage: '',
     isActive: false,
   });
+  const formatTimestamp = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Formats the time e.g., '14:00'
+  };
 
   useEffect(() => {
     console.log('pwoeirnq');
@@ -130,18 +134,36 @@ const Message = ({ matchId }) => {
         </div>
 
         <div className='message-list' ref={messageListRef}>
-          {messages.map((msg, index) => (
-            <div
-              key={index}
-              className={
-                msg.fromUserId === currentUser
-                  ? 'message-sent'
-                  : 'message-received'
-              }
-            >
-              {msg.message}
-            </div>
-          ))}
+          {messages.map((msg, index) => {
+            const isLastMessageByUser =
+              index === messages.length - 1 ||
+              messages[index + 1].fromUserId !== msg.fromUserId;
+
+            return (
+              <div key={index} className='message-and-timestamp'>
+                <div
+                  className={
+                    msg.fromUserId === currentUser
+                      ? 'message-sent'
+                      : 'message-received'
+                  }
+                >
+                  {msg.message}
+                </div>
+                {isLastMessageByUser && (
+                  <div
+                    className={`timestamp ${
+                      msg.fromUserId === currentUser
+                        ? 'timestamp-right'
+                        : 'timestamp-left'
+                    }`}
+                  >
+                    {formatTimestamp(msg.timestamp)}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         <div className='message-input'>

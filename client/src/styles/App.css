@@ -758,7 +758,10 @@ select.step1-input{
   padding: 10px;
   background-color: inherit;
   box-sizing: border-box;
+}
 
+.message-separate {
+  background-color: red;
 }
 
 .match-info {
@@ -776,6 +779,20 @@ select.step1-input{
   border-radius: 5px;
   cursor: pointer;
   background-color: rgba(255,255,255,0.1);
+}
+
+.timestamp-right{
+  text-align: right;
+
+}
+.message-and-timestamp, .timestamp{
+  width: 100%;
+  background-color: #161616;
+}
+
+
+.timestamp-left{
+  text-align: left;
 }
 
 .send-button{
@@ -799,6 +816,33 @@ select.step1-input{
   max-width: 60%;
   width: fit-content;
   word-break: break-word;
+  position: relative;
+  overflow: visible;
+}
+
+.message-sent::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: -5px; /* Adjust for sent messages */
+  border-width: 10px;
+  border-style: solid;
+  border-color: rgb(81, 178, 237) transparent transparent rgb(81, 178, 237);
+  transform: rotate(45deg);
+  overflow: visible;
+}
+
+.message-received::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: -5px; /* Adjust for received messages */
+  border-width: 10px;
+  border-style: solid;
+  border-color: white transparent transparent white;
+  transform: rotate(45deg);
+  overflow: visible;
+
 }
 
 .message-sent {
@@ -905,7 +949,7 @@ select.step1-input{
   color: black;
   align-self: flex-start;
   background-color: white;
-
+  margin-left: 10px;
 }
 
 
