@@ -10,6 +10,7 @@ import Icon from '@mdi/react';
 import ExploreNavbar from './ExploreNavbar';
 import MatchDetail from '../home/OpenMatch';
 import Message from './Message';
+import DevButton from '../dev/createDelUsers';
 
 const ExploreHome = () => {
   const [userInfo, setUserInfo] = useState({
@@ -31,7 +32,7 @@ const ExploreHome = () => {
   const [showMatchDetails, setShowMatchDetails] = useState(false);
   const [selectedMatchId, setSelectedMatchId] = useState(null);
   const [currentRightView, setCurrentRightView] = useState('default');
-
+  const [isMatchConfirmed, setIsMatchConfirmed] = useState(false);
 
   useEffect(() => {
     fetchUserInfo();
@@ -99,8 +100,8 @@ const ExploreHome = () => {
   };
 
   const showExplorePage = () => {
-    console.log('set right view to matches')
-    setCurrentRightView('matches'); 
+    console.log('set right view to matches');
+    setCurrentRightView('matches');
   };
 
   const fetchUserInfo = async () => {
@@ -157,10 +158,6 @@ const ExploreHome = () => {
     setCurrentRightView('matchDetail');
   };
 
-  const handleExploreNavbarClick = () => {
-    setShowMatchDetails(false);
-  };
-
   const handleMessageClick = () => {
     setCurrentRightView('message');
   };
@@ -173,11 +170,16 @@ const ExploreHome = () => {
       if (liked) {
         try {
           const userId = localStorage.getItem('userId');
-          await axios.post(`/api/profile/like`, {
+          const response = await axios.post(`/api/profile/like`, {
             userId: userId,
             likedUserId: likedUserId,
           });
-          console.log(`Liked user with ID: ${likedUserId}`);
+          if (response.data.message === 'Match found!') {
+            setIsMatchConfirmed(true);
+            console.log('Match found with user ID:', likedUserId);
+          } else {
+            console.log('Liked user with ID:', likedUserId);
+          }
         } catch (error) {
           console.error('Error updating likes:', error);
         }
@@ -185,6 +187,8 @@ const ExploreHome = () => {
       setTimeout(() => {
         setCurrentIndex(currentIndex + 1);
         cardElement.classList.remove('fade-out-animation');
+        // find a way to remove the "its a match, maybe display none class"
+
       }, 500);
     }
   };
@@ -253,20 +257,28 @@ const ExploreHome = () => {
         )}
         {activeView === 'messages' && <div></div>}
       </div>
+      {isMatchConfirmed && (
+        <div className='match-confirmed'>
+          <h2>It's a Match!</h2>
+        </div>
+      )}
 
       <div className='explore-right'>
-        <ExploreNavbar  onExploreClick={showExplorePage}/>
+        <ExploreNavbar onExploreClick={showExplorePage} />
         {currentRightView === 'matchDetail' ? (
           <div>
             <MatchDetail matchId={selectedMatchId} />
             <div className='message-button' onClick={handleMessageClick}>
               <h4>Message</h4>
-              <Icon className='message-icon' path={mdiMessageReplyOutline} size={1} />
+              <Icon
+                className='message-icon'
+                path={mdiMessageReplyOutline}
+                size={1}
+              />
             </div>
           </div>
-            ) : currentRightView === 'message' ? (
-              <Message matchId={selectedMatchId} />
-
+        ) : currentRightView === 'message' ? (
+          <Message matchId={selectedMatchId} />
         ) : usersToExplore.length > 0 &&
           currentIndex < usersToExplore.length ? (
           <div className='card-wrapper'>
@@ -369,6 +381,7 @@ const ExploreHome = () => {
           <div id='explore-end'>No more users to explore</div>
         )}
       </div>
+      <DevButton/>
     </div>
   );
 };

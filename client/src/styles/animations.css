@@ -36,3 +36,14 @@
     background-color: transparent;
 }
 }
+
+@keyframes matchAnimation {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.match-confirmed {
+  animation: matchAnimation 2s ease-in-out;
+  width: 100%;
+}

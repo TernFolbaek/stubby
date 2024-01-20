@@ -1146,6 +1146,12 @@ select.step1-input{
   transform: translateY(-50%);
 }
 
+
+
+#loading-match-details{
+  margin: auto;
+  background-color: #161616;
+}
 .next-card-icon{
   width: fit-content;
   height: auto;

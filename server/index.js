@@ -72,10 +72,14 @@ const userRoutes = require('./routes/userRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const explorationRoutes = require('./routes/explorationRoutes');
 const messageRoutes = require('./routes/messageRoutes');
+const devRoutes = require('./routes/devRoutes');
+
 app.use('/api/users', userRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/explore', explorationRoutes);
 app.use('/api/messages', messageRoutes);
+app.use('/api/dev', devRoutes);
+
 
 
 const PORT = process.env.PORT || 3001;

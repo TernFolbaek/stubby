@@ -78,7 +78,7 @@ const MatchDetail = ({ matchId }) => {
     fetchUserInfo();
   }, [matchId]);
 
-  if (!userInfo) return <div>Loading match details...</div>;
+  if (!userInfo) return <div id='loading-match-details'>Loading match details...</div>;
 
 
   return (
