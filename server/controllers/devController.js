@@ -1,15 +1,28 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+require('dotenv').config();
 
 const createUsers = async (req, res) => {
   try {
-    const hashedPassword = await bcrypt.hash('password123', 10);
+    const hashedPassword1 = await bcrypt.hash(
+      process.env.DEVUSER1_PASSWORD,
+      10
+    );
+    const hashedPassword2 = await bcrypt.hash(
+      process.env.DEVUSER2_PASSWORD,
+      10
+    );
+    const hashedPassword3 = await bcrypt.hash(
+      process.env.DEVUSER3_PASSWORD,
+      10
+    );
 
     const users = [
       {
+        userImage: '/pfp/dog.jpg',
         username: 'DevUser1',
         email: 'devuser1@example.com',
-        password: hashedPassword,
+        password: hashedPassword1,
         firstName: 'Dev',
         lastName: 'User1',
         gender: 'Not Specified',
@@ -17,17 +30,17 @@ const createUsers = async (req, res) => {
         location: 'City A',
         age: 30,
         institution: 'Institution A',
-        interests: ['coding', 'tech'],
-        subjects: ['humanities', 'math'],
+        interests: '["coding", "tech"]',
         description: 'Description for DevUser1',
         hasProfile: true,
         matches: [],
         likes: [],
       },
       {
+        userImage: '/pfp/dog.jpg',
         username: 'DevUser2',
         email: 'devuser2@example.com',
-        password: hashedPassword,
+        password: hashedPassword2,
         firstName: 'Dev',
         lastName: 'User2',
         gender: 'Not Specified',
@@ -35,17 +48,17 @@ const createUsers = async (req, res) => {
         location: 'City B',
         age: 28,
         institution: 'Institution B',
-        interests: ['testing', 'quality assurance'],
-        subjects: ['humanities', 'math'],
+        interests: '["testing", "quality assurance"]',
         description: 'Description for DevUser2',
         hasProfile: true,
         matches: [],
         likes: [],
       },
       {
+        userImage: '/pfp/dog.jpg',
         username: 'DevUser3',
         email: 'devuser3@example.com',
-        password: hashedPassword,
+        password: hashedPassword3,
         firstName: 'Dev',
         lastName: 'User3',
         gender: 'Not Specified',
@@ -53,8 +66,7 @@ const createUsers = async (req, res) => {
         location: 'City C',
         age: 35,
         institution: 'Institution C',
-        interests: ['management', 'leadership'],
-        subjects: ['humanities', 'math'],
+        interests: '["management", "leadership"]',
         description: 'Description for DevUser3',
         hasProfile: true,
         matches: [],

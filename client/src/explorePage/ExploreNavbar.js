@@ -7,7 +7,7 @@ const ExploreNavbar = ({ onExploreClick }) => {
     <div className='explore-nav flex justify-between items-center h-15 w-full'>
       <h3 className='italic'>Stubby</h3>
       <div className=' navbarStyle explore-navbar-buttons flex gap-5 px-5 bg-inherit'>
-        <div className='flex items-center gap-2 py-1 px-2 rounded bg-button-purple cursor-pointer'>
+        <div className='flex items-center gap-2 py-2 px-2 rounded bg-button-purple cursor-pointer'>
           <Icon path={mdiCompassOutline} size={1} className='bg-none' />
           <h5
             className='text-white bg-none font-normal pr-2'
@@ -16,10 +16,10 @@ const ExploreNavbar = ({ onExploreClick }) => {
             Explore
           </h5>
         </div>
-        <div className='flex items-center gap-3 py-1 px-2 rounded bg-button-light cursor-pointer'>
+        <div className='flex items-center gap-3 py-2 px-2 rounded bg-button-light cursor-pointer'>
           <Icon path={mdiBellOutline} size={0.8} className='bg-none' />
         </div>
-        <div className='flex items-center gap-3 py-1 px-2 rounded bg-button-light cursor-pointer'>
+        <div className='flex items-center gap-3 py-2 px-2 rounded bg-button-light cursor-pointer'>
           <Icon path={mdiCogOutline} size={0.8} className='bg-none' />
         </div>
       </div>

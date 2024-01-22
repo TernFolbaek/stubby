@@ -8,6 +8,7 @@ const http = require('http');
 // Create Express app
 const app = express();
 app.use(express.json());
+app.use('/pfp', express.static('pfp'));
 
 // Configure CORS
 const corsOptions = {
