@@ -11,6 +11,7 @@ import ExploreNavbar from './ExploreNavbar';
 import MatchDetail from '../home/OpenMatch';
 import Message from './Message';
 import DevButton from '../dev/createDelUsers';
+import Messages from './Messages';
 
 const ExploreHome = () => {
   const [userInfo, setUserInfo] = useState({
@@ -188,7 +189,6 @@ const ExploreHome = () => {
         setCurrentIndex(currentIndex + 1);
         cardElement.classList.remove('fade-out-animation');
         // find a way to remove the "its a match, maybe display none class"
-
       }, 500);
     }
   };
@@ -255,7 +255,11 @@ const ExploreHome = () => {
             ))}
           </div>
         )}
-        {activeView === 'messages' && <div></div>}
+        {activeView === 'messages' && (
+          <div className='explore'>
+            <Messages userId={localStorage.getItem('userId')}/>
+          </div>
+        )}
       </div>
       {isMatchConfirmed && (
         <div className='match-confirmed'>
@@ -381,7 +385,7 @@ const ExploreHome = () => {
           <div id='explore-end'>No more users to explore</div>
         )}
       </div>
-      <DevButton/>
+      <DevButton />
     </div>
   );
 };

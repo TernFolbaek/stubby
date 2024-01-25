@@ -1,5 +1,5 @@
 const Message = require('../models/message');
-
+const User = require('../models/user')
 const postMessage = async (req, res) => {
   try {
     const { fromUserId, toUserId, message } = req.body;
@@ -42,4 +42,48 @@ const fetchMessages = async (req, res) => {
   }
 };
 
-module.exports = { postMessage, fetchMessages };
+const getMessagePreviews = async (req, res) => {
+  try {
+    const currentUserId = req.params.userId;
+    // Fetch all messages where the current user is involved
+    const messages = await Message.find({
+      $or: [{ fromUserId: currentUserId }, { toUserId: currentUserId }]
+    }).populate('fromUserId toUserId');
+
+    // Identify unique matches
+    let matches = new Set();
+    messages.forEach(message => {
+      let otherUserId = message.fromUserId._id.equals(currentUserId) ? message.toUserId._id : message.fromUserId._id;
+      matches.add(otherUserId.toString());
+    });
+
+    let messagePreviews = [];
+
+    for (let matchId of matches) {
+      // Fetch match details
+      const matchUser = await User.findById(matchId);
+      if (matchUser) {
+        // Find the latest message with this match
+        const latestMessage = messages
+          .filter(m => m.fromUserId._id.equals(matchId) || m.toUserId._id.equals(matchId))
+          .sort((a, b) => b.timestamp - a.timestamp)[0];
+
+        messagePreviews.push({
+          matchId: matchId,
+          matchName: matchUser.username,
+          matchProfilePic: matchUser.userImage ? `data:${matchUser.userImage.contentType};base64,${matchUser.userImage.data.toString('base64')}` : null,
+          lastMessage: latestMessage.message
+        });
+      }
+    }
+
+    res.status(200).json(messagePreviews);
+  } catch (error) {
+    console.error('Error getting message previews:', error);
+    res.status(500).json({ message: 'Error fetching message previews', error: error.message });
+  }
+};
+
+
+
+module.exports = { postMessage, fetchMessages, getMessagePreviews };
