@@ -69,7 +69,7 @@ const Match = ({ matchId, onSelectMatch }) => {
     fetchMatchInfo();
   }, [matchId]);
 
-  if (!matchInfo) return <div>Loading...</div>;
+  if (!matchInfo) return <div className='loading-ring'></div>;
 
   return (
     <div className='match' onClick={goToMatchDetail}>
