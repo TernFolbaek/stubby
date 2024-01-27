@@ -11,21 +11,20 @@ const Home = () => {
   const containerRef = useRef(null);
 
   function interpolateColor(color1, color2, factor) {
-    if (arguments.length < 3) { 
-      factor = 0.5; 
+    if (arguments.length < 3) {
+      factor = 0.5;
     }
     var result = color1.slice();
     for (var i = 0; i < 3; i++) {
       result[i] = Math.round(result[i] + factor * (color2[i] - color1[i]));
     }
     return result;
-  };
-  
+  }
+
   function rgbToCss(rgb) {
     return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
   }
 
-  
   useEffect(() => {
     if (typing) {
       if (typedText.length < fullText.length) {
@@ -62,19 +61,42 @@ const Home = () => {
           const startColor = [255, 255, 255]; // white
           const endColor = [183, 135, 245]; // Light purple
           const startFontSize = 80; // Starting font size in pixels
-          const endFontSize = 50; 
-  
+          const endFontSize = 50;
+
           let fontSizeFactor = Math.abs(top / height); // Adjust as needed
           fontSizeFactor = Math.max(0, Math.min(1, fontSizeFactor));
-  
-          const interpolatedFontSize = startFontSize + (endFontSize - startFontSize) * fontSizeFactor;
+
+          const interpolatedFontSize =
+            startFontSize + (endFontSize - startFontSize) * fontSizeFactor;
           stubbyElement.style.fontSize = `${interpolatedFontSize}px`;
 
           let colorFactor = Math.abs(top / height); // Adjust as needed
           colorFactor = Math.max(0, Math.min(1, colorFactor));
-  
-          const blendedColor = interpolateColor(startColor, endColor, colorFactor);
+
+          const blendedColor = interpolateColor(
+            startColor,
+            endColor,
+            colorFactor
+          );
           stubbyElement.style.color = rgbToCss(blendedColor);
+        }
+
+        // Calculate the color value based on the scroll position
+        let colorValue = Math.round((Math.abs(bottom) / Math.abs(top)) * 255);
+        colorValue = 255 - Math.max(0, Math.min(colorValue, 255)); // Invert and clamp the value
+
+
+        const scrollArrow = document.querySelector('.scroll-arrow');
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+
+        if (scrollArrow) {
+          scrollArrow.style.color = `rgb(${colorValue},${colorValue},${colorValue})`;
+
+          if (Math.abs(top) >= bottom) {
+            scrollIndicator.classList.add('flipped');
+          } else {
+            scrollIndicator.classList.remove('flipped');
+          }
         }
       }
     };
@@ -121,9 +143,12 @@ const Home = () => {
             </Link>
           </div>
         </div>
+        <div className='scroll-indicator'>
+          <div className='scroll-arrow'></div>
+        </div>
       </div>
 
-      <AppInfoSection scrollContainerRef={containerRef}  />
+      <AppInfoSection scrollContainerRef={containerRef} />
     </div>
   );
 };

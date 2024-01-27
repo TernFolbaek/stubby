@@ -25,3 +25,45 @@
 
 }
 
+.scroll-indicator {
+    background: none;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000; /* Ensure it's visible above other content */
+    animation: bounce 2s infinite;
+  }
+  
+  .scroll-arrow {
+    background: none;
+    border: solid currentColor; 
+    border-width: 0 6px 6px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease-in-out;
+    width: 20px;
+    height: 20px;
+    margin: 20px;
+  }
+  
+  .flipped .scroll-arrow {
+    transform: rotate(-135deg); /* Flips the arrow */
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-30px);
+    }
+    60% {
+      transform: translateY(-15px);
+    }
+  }
+  

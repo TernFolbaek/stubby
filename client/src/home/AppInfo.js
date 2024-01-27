@@ -17,7 +17,6 @@ const AppInfoSection = ({ scrollContainerRef }) => {
         sectionRect.top + sectionRect.height > 0 &&
         sectionRect.bottom - sectionRect.height < window.innerHeight;
       setIsVisible(isVisible);
-      console.log(isVisible);
     }
   };
 

@@ -1,0 +1,32 @@
+.profile-preview {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 400px;
+    height: 400px;
+    background-color: rgb(23, 23, 23);
+  }
+  
+.preview-image {
+    width: 140px;
+    height: 140px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.preview-interest-card-container{
+    display: flex;
+    gap: 10px;
+    background-color: #161616;
+    padding: 10px 0;
+    background: none;
+  }
+  
+  .preview-user-interests{
+    background-color: #202020;
+    width: fit-content;
+    padding: 3px 10px;
+    border-radius: 25px;
+  }

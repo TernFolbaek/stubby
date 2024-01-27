@@ -3,12 +3,11 @@ import axios from 'axios';
 
 const Messages = () => {
   const [messagePreviews, setMessagePreviews] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // Add loading state
-
+  const [isLoading, setIsLoading] = useState(true); 
   useEffect(() => {
     const fetchMessagePreviews = async () => {
       try {
-        setIsLoading(true); // Start loading
+        setIsLoading(true); 
         const userId = localStorage.getItem('userId');
         const response = await axios.get(`/api/messages/preview/${userId}`);
         console.log(response.data);
@@ -16,7 +15,7 @@ const Messages = () => {
       } catch (error) {
         console.error('Error fetching message previews:', error);
       } finally {
-        setIsLoading(false); // Stop loading regardless of success or failure
+        setIsLoading(false); 
       }
     };
 

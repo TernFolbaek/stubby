@@ -5,6 +5,8 @@ import './styles/components.css';
 import './styles/helpers.css';
 import './styles/App.css';
 import './styles/home.css';
+import './styles/signUpForm.css';
+
 
 
 
