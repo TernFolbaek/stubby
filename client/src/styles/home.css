@@ -1,0 +1,27 @@
+ /* HOME */
+
+.stubby-home{
+     position: fixed;
+     top: 0px;
+     right: 100px;
+     z-index: 6;
+}
+
+.app-info-image{
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.scrollable-content {
+    background-color: #2d2d2d; 
+    color: white;
+    padding: 20px;
+    text-align: center;
+    height: 100vh;
+}
+.contact-section{
+    background-color: #2d2d2d; 
+
+}
+

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'wouter';
+import AppInfoSection from './AppInfo';
 
 const Home = () => {
   const fullText =
@@ -7,7 +8,24 @@ const Home = () => {
   const [typedText, setTypedText] = useState('');
   const [typing, setTyping] = useState(true);
   const heroRef = useRef(null);
+  const containerRef = useRef(null);
 
+  function interpolateColor(color1, color2, factor) {
+    if (arguments.length < 3) { 
+      factor = 0.5; 
+    }
+    var result = color1.slice();
+    for (var i = 0; i < 3; i++) {
+      result[i] = Math.round(result[i] + factor * (color2[i] - color1[i]));
+    }
+    return result;
+  };
+  
+  function rgbToCss(rgb) {
+    return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+  }
+
+  
   useEffect(() => {
     if (typing) {
       if (typedText.length < fullText.length) {
@@ -22,7 +40,6 @@ const Home = () => {
 
   useEffect(() => {
     const onScroll = () => {
-      console.log('Scroll event fired');
       if (heroRef.current) {
         const { top, bottom } = heroRef.current.getBoundingClientRect();
         const height = window.innerHeight;
@@ -36,11 +53,29 @@ const Home = () => {
 
         opacity = Math.max(0, Math.min(1, opacity));
 
-        // Apply opacity to each text element
         const textElements = heroRef.current.querySelectorAll('.text-element');
         textElements.forEach((element) => {
           element.style.opacity = opacity;
         });
+        const stubbyElement = heroRef.current.querySelector('.stubby-home');
+        if (stubbyElement) {
+          const startColor = [255, 255, 255]; // white
+          const endColor = [183, 135, 245]; // Light purple
+          const startFontSize = 80; // Starting font size in pixels
+          const endFontSize = 50; 
+  
+          let fontSizeFactor = Math.abs(top / height); // Adjust as needed
+          fontSizeFactor = Math.max(0, Math.min(1, fontSizeFactor));
+  
+          const interpolatedFontSize = startFontSize + (endFontSize - startFontSize) * fontSizeFactor;
+          stubbyElement.style.fontSize = `${interpolatedFontSize}px`;
+
+          let colorFactor = Math.abs(top / height); // Adjust as needed
+          colorFactor = Math.max(0, Math.min(1, colorFactor));
+  
+          const blendedColor = interpolateColor(startColor, endColor, colorFactor);
+          stubbyElement.style.color = rgbToCss(blendedColor);
+        }
       }
     };
 
@@ -57,21 +92,21 @@ const Home = () => {
   }, []);
 
   return (
-    <div className='home-container'>
+    <div ref={containerRef} className='home-container'>
       <div
         ref={heroRef}
         className='background-hero min-h-screen bg-no-repeat bg-cover bg-center'
       >
         <div className='text-right p-20 right-aligned-div'>
-          <h1 className='text-5xl font-bold text-[80px] no-background italic p-7 text-element'>
+          <h1 className='text-5xl font-bold text-[80px] no-background italic p-7 stubby-home'>
             Stubby
           </h1>
-          <p className='text-xl mt-4 text-[60px] font-mono no-background text-element'>
+          <p className='text-xl mt-40 text-[60px] font-mono no-background text-element typed-home'>
             {typedText}
             <span className='blinker'></span>
           </p>
 
-          <div className='mt-8 no-background button-container right-aligned-div home-buttons'>
+          <div className='mt-20 no-background button-container right-aligned-div home-buttons'>
             <Link
               to='/signUp'
               className='text-element button-signup hover:bg-transparent hover:text-purple-400 bg-purple-400 text-white font-bold py-2 px-10 border rounded-full mr-4 text-[17px] cursor-pointer transition duration-500'
@@ -87,9 +122,8 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className='scrollable-section'>
-        <p>Scrollable content goes here...</p>
-      </div>
+
+      <AppInfoSection scrollContainerRef={containerRef}  />
     </div>
   );
 };
