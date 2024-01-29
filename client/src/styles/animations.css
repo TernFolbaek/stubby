@@ -101,3 +101,12 @@
 .slideInGrow {
   animation: slideInGrow 1s ease forwards;
 }
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0); /* Button at its original position */
+  }
+  50% {
+    transform: translateY(-10px); /* Button moves up 10 pixels */
+  }
+}

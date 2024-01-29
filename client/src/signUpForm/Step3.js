@@ -1,7 +1,11 @@
 import React from 'react';
 import OpenAI from 'openai';
+import Icon from '@mdi/react';
+import { mdiCursorPointer } from '@mdi/js';
+import TypingEffect from './helper/typingEffect';
+
 const openai = new OpenAI({
-  apiKey: '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',
+  apiKey: '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',
   dangerouslyAllowBrowser: true,
 });
 
@@ -12,12 +16,12 @@ const Step3 = ({ setFormData, formData }) => {
 
   const generateIdea = async () => {
     const interests = formData.interests.join(', ');
-    const prompt = `Write a 150 character long description of myself based off my  ${interests}, make sure this description, make sure it is not too formal so it is inviting to other users to read.`;
+    const prompt = `Write a 150 character long description of myself based off my  ${interests}, make sure this description, make sure it is not too formal so it is inviting to other users to read`;
 
     try {
       const completion = await openai.chat.completions.create({
         messages: [
-          { role: 'system', content: 'You are a helpful assistant.' },
+          { role: 'system', content: 'You are a professional writer.' },
           { role: 'user', content: prompt },
         ],
         model: 'gpt-3.5-turbo',
@@ -33,7 +37,7 @@ const Step3 = ({ setFormData, formData }) => {
   };
 
   return (
-    <div className='flex justify-around'>
+    <div className='flex justify-around w-[85%] ml-[5%]'>
       <div className='text-mono flex-col items-center text-[25px] w-[50%]'>
         <h4 className='mb-5'>
           Describe Yourself{' '}
@@ -51,7 +55,18 @@ const Step3 = ({ setFormData, formData }) => {
           {formData.description ? formData.description.length : 0}/400
         </div>
       </div>
-      <button onClick={generateIdea}>nice</button>
+      <div className='pointer'>
+        <div className='inspiration' onClick={generateIdea}>
+          <h4 className='button-login hover:bg-purple-400 hover:text-white bg-transparent text-purple-400 font-semibold py-2 px-4 border border-purple-400 rounded-full text-[17px] cursor-pointer transition duration-500'>
+            Generate
+          </h4>
+        </div>
+        <Icon
+          className='pointer-hand bg-none'
+          path={mdiCursorPointer}
+          size={1}
+        />
+      </div>
 
       <div className='profile-preview'>
         <div className='preview-image-name flex gap-[15px] items-center bg-inherit'>
@@ -93,7 +108,7 @@ const Step3 = ({ setFormData, formData }) => {
         </div>
         <h3 className='text-left mt-2 bg-inherit'>Description:</h3>
         <h5 className='text-justify font-light gray bg-inherit'>
-          {formData.description || 'Your description will appear here...'}
+          <TypingEffect text={formData.description || ''} typingSpeed={20} />
         </h5>
       </div>
     </div>
