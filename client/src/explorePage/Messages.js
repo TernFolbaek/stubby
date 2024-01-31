@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Messages = () => {
+const Messages = ({onSelectMessage}) => {
   const [messagePreviews, setMessagePreviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true); 
   useEffect(() => {
@@ -34,26 +34,18 @@ const Messages = () => {
       {isLoading ? (
         <div className='loading-ring'></div>
       ) : (
-        messagePreviews.map(
-          ({ matchId, matchName, matchProfilePic, lastMessage }, index) => (
-            <div className='message-container-hr'>
-              <div className='message'>
-                <img
-                  src={matchProfilePic}
-                  alt={matchName}
-                  className='message-image'
-                />
-                <div className='message-text'>
-                  <h4 className='match-name'>{matchName}</h4>
-                  <p className='match-description'>
-                    {renderMessagePreview(lastMessage)}
-                  </p>
-                </div>
+        messagePreviews.map(({ matchId, matchName, matchProfilePic, lastMessage }, index) => (
+          <div className='message-container-hr' key={index} onClick={() => onSelectMessage(matchId)}>
+            <div className='message'>
+              <img src={matchProfilePic} alt={matchName} className='message-image' />
+              <div className='message-text'>
+                <h4 className='match-name'>{matchName}</h4>
+                <p className='match-description'>{renderMessagePreview(lastMessage)}</p>
               </div>
-              <hr className='message-hr' />
             </div>
-          )
-        )
+            <hr className='message-hr' />
+          </div>
+        ))
       )}
     </div>
   );

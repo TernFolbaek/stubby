@@ -35,6 +35,7 @@ const ExploreHome = () => {
   const [currentRightView, setCurrentRightView] = useState('default');
   const [isMatchConfirmed, setIsMatchConfirmed] = useState(false);
 
+
   useEffect(() => {
     fetchUserInfo();
     fetchUsersToExplore();
@@ -159,7 +160,8 @@ const ExploreHome = () => {
     setCurrentRightView('matchDetail');
   };
 
-  const handleMessageClick = () => {
+  const handleMessageClick = (matchId) => {
+    setSelectedMatchId(matchId);
     setCurrentRightView('message');
   };
 
@@ -185,11 +187,11 @@ const ExploreHome = () => {
           console.error('Error updating likes:', error);
         }
       }
-      setTimeout(() => {
-        setCurrentIndex(currentIndex + 1);
-        cardElement.classList.remove('fade-out-animation');
-        // find a way to remove the "its a match, maybe display none class"
-      }, 500);
+      // setTimeout(() => {
+      //   setCurrentIndex(currentIndex + 1);
+      //   cardElement.classList.remove('fade-out-animation');
+      //   // find a way to remove the "its a match, maybe display none class"
+      // }, 500);
     }
   };
 
@@ -246,18 +248,27 @@ const ExploreHome = () => {
 
         {activeView === 'matches' && (
           <div className='explore'>
-            {userInfo.matches.map((matchId, index) => (
-              <Match
-                key={index}
-                matchId={matchId}
-                onSelectMatch={handleMatchSelect}
-              />
-            ))}
+            {userInfo.matches.length > 0 ? (
+              userInfo.matches.map((matchId, index) => (
+                <Match
+                  key={index}
+                  matchId={matchId}
+                  onSelectMatch={handleMatchSelect}
+                />
+              ))
+            ) : (
+              <div className='bg-inherit'>
+                <h2 className='bg-inherit'>You have no matches yet</h2>
+                <h4 className='bg-inherit text-gray-400'>
+                  Explore to receive matches
+                </h4>
+              </div>
+            )}
           </div>
         )}
         {activeView === 'messages' && (
           <div className='explore'>
-            <Messages userId={localStorage.getItem('userId')}/>
+            <Messages onSelectMessage={handleMessageClick} />
           </div>
         )}
       </div>
@@ -281,7 +292,7 @@ const ExploreHome = () => {
               />
             </div>
           </div>
-        ) : currentRightView === 'message' ? (
+        ) : currentRightView === 'message' && selectedMatchId ? (
           <Message matchId={selectedMatchId} />
         ) : usersToExplore.length > 0 &&
           currentIndex < usersToExplore.length ? (
