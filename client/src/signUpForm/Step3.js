@@ -4,8 +4,9 @@ import Icon from '@mdi/react';
 import { mdiCursorPointer } from '@mdi/js';
 import TypingEffect from './helper/typingEffect';
 
+
 const openai = new OpenAI({
-  apiKey: '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',
+  apiKey: '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',
   dangerouslyAllowBrowser: true,
 });
 
@@ -41,8 +42,10 @@ const Step3 = ({ setFormData, formData }) => {
       <div className='text-mono flex-col items-center text-[25px] w-[50%]'>
         <h4 className='mb-5'>
           Describe Yourself{' '}
+
           <span className='gray font-light'>(max 400 characters)</span>
         </h4>
+    
 
         <textarea
           className='description-textarea text-justify'
@@ -59,6 +62,7 @@ const Step3 = ({ setFormData, formData }) => {
         <div className='inspiration' onClick={generateIdea}>
           <h4 className='button-login hover:bg-purple-400 hover:text-white bg-transparent text-purple-400 font-semibold py-2 px-4 border border-purple-400 rounded-full text-[17px] cursor-pointer transition duration-500'>
             Generate
+
           </h4>
         </div>
         <Icon
