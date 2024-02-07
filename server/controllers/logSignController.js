@@ -6,8 +6,6 @@ const userSignUp = async (req, res) => {
   try {
     let { username, email, password } = req.body;
 
-
-
     let user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({ message: 'User already exists' });
@@ -16,7 +14,7 @@ const userSignUp = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    console.log(username, email, password);
+
     user = new User({ username, email, password: hashedPassword });
     await user.save();
 
@@ -36,6 +34,7 @@ const userSignUp = async (req, res) => {
 };
 
 const userLogIn = async (req, res) => {
+  console.log('in login')
   try {
     const { username, password } = req.body;
     console.log(`Logging in user: ${username}`);

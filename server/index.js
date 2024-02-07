@@ -74,12 +74,15 @@ const profileRoutes = require('./routes/profileRoutes');
 const explorationRoutes = require('./routes/explorationRoutes');
 const messageRoutes = require('./routes/messageRoutes');
 const devRoutes = require('./routes/devRoutes');
+const notificationRoutes = require('./routes/notificationRoutes')
 
 app.use('/api/users', userRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/explore', explorationRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/dev', devRoutes);
+app.use('/api/notifications', notificationRoutes);
+
 
 
 

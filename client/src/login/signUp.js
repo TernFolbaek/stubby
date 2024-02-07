@@ -6,7 +6,7 @@ import '../styles/helpers.css';
 import '../styles/animations.css';
 import googleIcon from '../images/google.png';
 import axios from 'axios';
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -16,7 +16,7 @@ const SignUp = () => {
     email: '',
   });
 
-  const [, navigate] = useLocation();
+  const navigate = useNavigate();
 
   const handleOutsideClick = (e) => {
     if (e.target.id === 'modal-backdrop') {

@@ -1,16 +1,16 @@
 import React from 'react';
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-  const [location, setLocation] = useLocation();
-  const token = localStorage.getItem('authToken'); 
+  const navigate = useNavigate(); // Use useNavigate for navigation in react-router-dom
+  const token = localStorage.getItem('authToken');
 
   if (!token) {
-    setLocation('/');
-    return null; 
+    navigate('/'); // Redirect to the home page if there is no token
+    return null;
   }
 
-  return children; 
+  return children; // Render the protected content if the user is authenticated
 };
 
 export default ProtectedRoute;

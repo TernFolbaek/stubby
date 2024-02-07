@@ -22,9 +22,11 @@ const Message = ({ matchId }) => {
   };
 
   useEffect(() => {
-
     const fetchMessages = async () => {
-      console.log(matchId)
+      console.log('fetch messages entry');
+      console.log('match id', matchId);
+      console.log('current user', currentUser);
+
       try {
         const response = await axios.get(
           `/api/messages/retrieve/${matchId}/${currentUser}`

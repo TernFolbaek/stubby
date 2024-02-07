@@ -35,7 +35,6 @@ const ExploreHome = () => {
   const [currentRightView, setCurrentRightView] = useState('default');
   const [isMatchConfirmed, setIsMatchConfirmed] = useState(false);
 
-
   useEffect(() => {
     fetchUserInfo();
     fetchUsersToExplore();
@@ -102,7 +101,6 @@ const ExploreHome = () => {
   };
 
   const showExplorePage = () => {
-    console.log('set right view to matches');
     setCurrentRightView('matches');
   };
 
@@ -154,13 +152,23 @@ const ExploreHome = () => {
     console.log('image', userInfo.userImage);
   };
 
-  const handleMatchSelect = (selectedId) => {
+  const handleMatchSelect = async (selectedId) => {
+    try {
+      const response = await axios.post(
+        `/api/notifications/explore/${selectedId}`
+      );
+      console.log(response.data)
+    } catch (error) {
+      console.error('Error updating match exploration status:', error);
+    }
     setShowMatchDetails(true);
     setSelectedMatchId(selectedId);
+    console.log(selectedMatchId)
     setCurrentRightView('matchDetail');
   };
 
   const handleMessageClick = (matchId) => {
+    console.log('here we are',matchId)
     setSelectedMatchId(matchId);
     setCurrentRightView('message');
   };
@@ -227,7 +235,7 @@ const ExploreHome = () => {
             }}
           ></div>
 
-          {/* Buttons */}
+
           <button
             onClick={() => setActiveViewWithStyle('matches')}
             className={`toggle-button absolute w-1/2 top-0.5 ${
@@ -283,7 +291,7 @@ const ExploreHome = () => {
         {currentRightView === 'matchDetail' ? (
           <div>
             <MatchDetail matchId={selectedMatchId} />
-            <div className='message-button' onClick={handleMessageClick}>
+            <div className='message-button' onClick={() => handleMessageClick(selectedMatchId)}>
               <h4>Message</h4>
               <Icon
                 className='message-icon'

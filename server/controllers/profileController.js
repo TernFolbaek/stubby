@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const Message = require('../models/message'); 
+const bcrypt = require('bcryptjs');
 
 const updateUserProfile = async (req, res) => {
   console.log('in profile backend');
@@ -93,13 +95,10 @@ const likeUser = async (req, res) => {
   try {
     const { userId, likedUserId } = req.body;
 
-
     await User.findByIdAndUpdate(userId, { $push: { likes: likedUserId } });
-
 
     const likedUser = await User.findById(likedUserId);
     if (likedUser.likes.includes(userId)) {
-
       await User.findByIdAndUpdate(userId, { $push: { matches: likedUserId } });
       await User.findByIdAndUpdate(likedUserId, { $push: { matches: userId } });
 
@@ -109,13 +108,54 @@ const likeUser = async (req, res) => {
     }
   } catch (error) {
     console.error('Error liking user:', error);
-    res.status(500).json({ message: 'Error liking user', error: error.message });
+    res
+      .status(500)
+      .json({ message: 'Error liking user', error: error.message });
   }
 };
 
+
+
+
+const deleteUser = async (req, res) => {
+  try {
+    const { userId, password } = req.body;
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Password is incorrect' });
+    }
+
+    // Remove user from others' matches
+    await User.updateMany({ matches: userId }, { $pull: { matches: userId } });
+
+
+    await Message.deleteMany({
+      $or: [{ fromUserId: userId }, { toUserId: userId }],
+    });
+
+
+    await User.findByIdAndDelete(userId);
+
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res
+      .status(500)
+      .json({ message: 'Error deleting user', error: error.message });
+  }
+};
 
 module.exports = {
   updateUserProfile,
   fetchUserInfo,
   likeUser,
+  deleteUser,
 };

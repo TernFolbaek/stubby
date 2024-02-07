@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
   firstName: { type: String, required: false },
   gender: { type: String, required: false },
   position: { type: String, required: false },
-  lastName: { type: String, required: false},
+  lastName: { type: String, required: false },
   timestamp: { type: Date, default: Date.now },
   location: { type: String, required: false },
   age: { type: Number, required: false },
@@ -26,6 +26,7 @@ const UserSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String,
   },
+  explored: { type: Boolean, default: false },
 });
 
 const User = mongoose.model('User', UserSchema);

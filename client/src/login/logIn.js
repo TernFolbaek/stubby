@@ -4,20 +4,18 @@ import '../styles/base.css';
 import '../styles/components.css';
 import '../styles/helpers.css';
 import '../styles/animations.css';
-
+import { Link, useNavigate } from 'react-router-dom'; 
 
 
 import googleIcon from '../images/google.png';
 import axios from 'axios';
-import { Link, useLocation } from 'wouter';
 
 const LogIn = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   });
-  const [, navigate] = useLocation();
-
+  const navigate = useNavigate(); 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -34,9 +32,12 @@ const LogIn = () => {
       console.log(hasProfile);
       if (hasProfile) {
         navigate('/explore-home');
+
+
         return;
       }
       navigate('/profile-info');
+
     } catch (error) {
       console.error('Login error', error.response);
     }
@@ -47,8 +48,8 @@ const LogIn = () => {
       <h1
         className='h1-stubby cursor-pointer'
         onClick={() => {
-          console.log('Heading clicked, navigating to /explore-home');
           navigate('/');
+
         }}
       >
         Stubby

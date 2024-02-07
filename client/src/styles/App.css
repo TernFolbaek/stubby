@@ -270,6 +270,21 @@ select.step1-input{
 
 }
 
+.notifications-content {
+  position: absolute;
+  top: 45px;
+  right: 50px;
+  overflow: visible;
+  width: 200px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  border-radius: 4px;
+  padding: 10px;
+  z-index: 1000; 
+}
+
+
+
 
 .next-back{
   position: absolute;
@@ -547,7 +562,6 @@ select.step1-input{
   radial-gradient(circle at top left, rgba(176, 175, 178, 0.1), transparent 30%),
   radial-gradient(circle at bottom right, rgba(176, 175, 178, 0.1), transparent 30%);
   position: relative;
-  overflow: hidden;
 
 }
 
@@ -1203,6 +1217,7 @@ select.step1-input{
   position: relative;
   background-color: inherit; 
   background-image: inherit;
+  overflow: visible;
 }
 
 #explore-end{
@@ -1269,6 +1284,7 @@ select.step1-input{
 .explore-nav{
   background-color: #171717;
   border-bottom: 1.5px solid #2D2D2D;
+  overflow: visible;
 }
 
 .explore-nav h3{
@@ -1345,7 +1361,7 @@ select.step1-input{
   justify-content: center; 
   align-items: center; 
   background-color: rgba(0, 0, 0, 0.5); 
-  z-index: 1000; 
+  z-index: 100; 
 }
 
 

@@ -1,23 +1,35 @@
 import React from 'react';
 import Icon from '@mdi/react';
-import { mdiCogOutline, mdiBellOutline, mdiCompassOutline } from '@mdi/js';
+import { mdiCogOutline, mdiCompassOutline } from '@mdi/js';
+import NotificationsButton from '../ExploreNavbar/Notifications';
+import { useLocation } from 'wouter';
 
 const ExploreNavbar = ({ onExploreClick }) => {
+  const [, setLocation] = useLocation();
+
+  const handleSettingsClick = () => {
+    setLocation('/settings');
+  };
+  const handleExploreClick = () => {
+    setLocation('/explore-home');
+  };
+
   return (
     <div className='explore-nav flex justify-between items-center h-15 w-full'>
       <h3 className='italic'>Stubby</h3>
-      <div className=' navbarStyle explore-navbar-buttons flex gap-5 px-5 bg-inherit'>
+      <div className='navbarStyle explore-navbar-buttons flex gap-5 px-5 bg-inherit'>
         <div
-          onClick={onExploreClick}
+          onClick={onExploreClick || handleExploreClick}
           className='flex items-center gap-2 py-2 px-2 rounded bg-button-purple cursor-pointer'
         >
           <Icon path={mdiCompassOutline} size={1} className='bg-none' />
           <h5 className='text-white bg-none font-normal pr-2'>Explore</h5>
         </div>
-        <div className='flex items-center gap-3 py-2 px-2 rounded bg-button-light cursor-pointer'>
-          <Icon path={mdiBellOutline} size={0.8} className='bg-none' />
-        </div>
-        <div className='flex items-center gap-3 py-2 px-2 rounded bg-button-light cursor-pointer'>
+        <NotificationsButton />
+        <div
+          onClick={handleSettingsClick}
+          className='flex items-center gap-3 py-2 px-2 rounded bg-button-light cursor-pointer'
+        >
           <Icon path={mdiCogOutline} size={0.8} className='bg-none' />
         </div>
       </div>

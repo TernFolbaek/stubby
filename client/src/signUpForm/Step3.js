@@ -6,7 +6,7 @@ import TypingEffect from './helper/typingEffect';
 
 
 const openai = new OpenAI({
-  apiKey: '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',
+  apiKey: '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',
   dangerouslyAllowBrowser: true,
 });
 

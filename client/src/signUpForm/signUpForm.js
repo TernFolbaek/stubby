@@ -1,6 +1,5 @@
-// SignUpForm.js (Controller Component with Tailwind CSS)
 import React, { useState } from 'react';
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Step1 from './step1';
 import Step2 from './Step2';
@@ -8,7 +7,7 @@ import Step3 from './Step3';
 import ProgressBar from './helper/ProgressBar';
 
 const SignUpForm = () => {
-  const [, navigate] = useLocation();
+  const navigate = useNavigate();
 
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
