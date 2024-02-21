@@ -4,18 +4,26 @@ const cors = require('cors');
 require('dotenv').config();
 const socketIo = require('socket.io');
 const http = require('http');
+const path = require('path');
 
 // Create Express app
 const app = express();
 app.use(express.json());
 app.use('/pfp', express.static('pfp'));
 
+app.use(express.static(path.join(__dirname, 'client', 'dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
+
 // Configure CORS
 const corsOptions = {
-  origin: 'http://localhost:3000', // Client URL
+  origin: ['http://167.172.179.134:3000', 'http://localhost:3000'],
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
 };
+
+
 app.use(cors(corsOptions));
 
 const server = http.createServer(app);

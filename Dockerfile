@@ -1,34 +1,42 @@
-# syntax=docker/dockerfile:1
-
-# Use a specific version of node based on the ARG value
+# Use a specific version of Node.js based on the ARG value, using the Alpine Linux version for a smaller image size
 ARG NODE_VERSION=18.16.0
-FROM node:${NODE_VERSION}-alpine
+FROM --platform=linux/amd64 node:${NODE_VERSION}-alpine
 
-# Set a specific working directory for your application
+# Set the working directory inside the Docker image for the application
 WORKDIR /app
 
-# Install server dependencies
+# Copy the package.json and package-lock.json for the server application
 COPY package*.json ./
+
+# Install the server dependencies defined in package.json
 RUN npm install
 
-# Install client dependencies
+# Copy the package.json and package-lock.json for the client application
 COPY client/package*.json ./client/
+
+# Install the client dependencies defined in the client's package.json
 RUN npm --prefix ./client install --fetch-timeout=300000
 
-# Copy the rest of your app's source code into the working directory
+# Copy the entire project into the /app directory inside the Docker image
 COPY . .
 
-# Change ownership of the application directory to the 'node' user
+# Debugging: List the contents of the /app/client directory to verify the structure
+RUN ls -la /app/client
+
+# Build the client application
+RUN npm --prefix ./client run build
+
+# Change the ownership of the /app directory and its contents to the 'node' user for security reasons
 RUN chown -R node:node /app
 
-# Set environment variable to production
+# Set the environment variable to production to optimize the Node.js environment for production
 ENV NODE_ENV production
 
-# Expose the port your app runs on
+# Expose port 3001 which the application uses
 EXPOSE 3001
 
-# Switch to the non-root user 'node' for running the application
+# Switch to the 'node' user to run the application (instead of using the root user)
 USER node
 
-# Command to run your app
+# Define the command to run the application
 CMD ["npm", "start"]

@@ -43,5 +43,5 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.x.x"
 
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://167.172.179.134:3001"
 }
