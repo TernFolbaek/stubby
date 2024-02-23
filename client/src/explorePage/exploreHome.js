@@ -10,7 +10,6 @@ import Icon from '@mdi/react';
 import ExploreNavbar from './ExploreNavbar';
 import MatchDetail from '../home/OpenMatch';
 import Message from './Message';
-import DevButton from '../dev/createDelUsers';
 import Messages from './Messages';
 
 const ExploreHome = () => {
@@ -404,7 +403,6 @@ const ExploreHome = () => {
           <div id='explore-end'>No more users to explore</div>
         )}
       </div>
-      <DevButton />
     </div>
   );
 };
