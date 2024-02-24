@@ -11,9 +11,9 @@ const app = express();
 app.use(express.json());
 app.use('/pfp', express.static('pfp'));
 
-app.use(express.static(path.join(__dirname, 'client', 'dist')));
+app.use(express.static(path.join(__dirname, 'client', 'public')));
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, 'client', 'public', 'index.html'));
 });
 
 // Configure CORS
