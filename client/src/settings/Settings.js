@@ -40,26 +40,28 @@ const Settings = () => {
   };
 
   return (
-    <div className='max-w-lg mx-auto p-5'>
-      <h1 className='text-2xl font-bold mb-5'>Settings</h1>
-      <button
-        onClick={handleEditProfile}
-        className='w-full bg-blue-500 text-white py-2 rounded mb-4 hover:bg-blue-600 transition duration-200'
-      >
-        Edit Profile
-      </button>
-      <button
-        onClick={openModal}
-        className='w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition duration-200'
-      >
-        Delete Account
-      </button>
-      {isModalOpen && (
-        <DeleteModal
-          onClose={closeModal}
-          onDeleteConfirm={handleDeleteConfirm}
-        />
-      )}
+    <div className='flex flex-col h-screen justify-center items-center '>
+      <div className='w-full max-w-xs p-5 border-2 border-gray-300 rounded-lg bg-dark-grey h-[300px]'>
+        <h1 className='text-2xl font-bold mb-5 bg-inherit'>Settings</h1>
+        <div
+          onClick={handleEditProfile}
+          className='w-[80%] bg-blue-400 text-white p-2 rounded mb-4 hover:bg-blue-500 transition duration-200 cursor-pointer '
+        >
+          Edit Profile
+        </div>
+        <div
+          onClick={openModal}
+          className='w-[80%] bg-purple-500 text-white p-2 rounded hover:bg-purple-600 transition duration-200 cursor-pointer'
+        >
+          Delete Account
+        </div>
+        {isModalOpen && (
+          <DeleteModal
+            onClose={closeModal}
+            onDeleteConfirm={handleDeleteConfirm}
+          />
+        )}
+      </div>
     </div>
   );
 };

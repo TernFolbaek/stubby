@@ -2,16 +2,17 @@ import React from 'react';
 import Icon from '@mdi/react';
 import { mdiCogOutline, mdiCompassOutline } from '@mdi/js';
 import NotificationsButton from '../ExploreNavbar/Notifications';
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
+
 
 const ExploreNavbar = ({ onExploreClick }) => {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
 
   const handleSettingsClick = () => {
-    setLocation('/settings');
+    navigate('/settings');
   };
   const handleExploreClick = () => {
-    setLocation('/explore-home');
+    navigate('/explore-home');
   };
 
   return (

@@ -133,7 +133,7 @@ const deleteUser = async (req, res) => {
       return res.status(401).json({ message: 'Password is incorrect' });
     }
 
-    // Remove user from others' matches
+
     await User.updateMany({ matches: userId }, { $pull: { matches: userId } });
 
 

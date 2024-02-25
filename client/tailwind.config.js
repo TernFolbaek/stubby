@@ -9,6 +9,8 @@ module.exports = {
         'light-purple': '#D6BCFA', 
         'button-purple': '#7B00FE',
         'button-light': '#2D2D2D',
+        'dark-grey': '#171717',
+        'settings-bg': '#505050',
       },
       spacing: {
         '0.6': '0.6rem',
