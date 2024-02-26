@@ -11,6 +11,7 @@ import ExploreNavbar from './ExploreNavbar';
 import MatchDetail from '../home/OpenMatch';
 import Message from './Message';
 import Messages from './Messages';
+import whiteRing from '../images/white-ring.png';
 
 const ExploreHome = () => {
   const [userInfo, setUserInfo] = useState({
@@ -156,18 +157,18 @@ const ExploreHome = () => {
       const response = await axios.post(
         `/api/notifications/explore/${selectedId}`
       );
-      console.log(response.data)
+      console.log(response.data);
     } catch (error) {
       console.error('Error updating match exploration status:', error);
     }
     setShowMatchDetails(true);
     setSelectedMatchId(selectedId);
-    console.log(selectedMatchId)
+    console.log(selectedMatchId);
     setCurrentRightView('matchDetail');
   };
 
   const handleMessageClick = (matchId) => {
-    console.log('here we are',matchId)
+    console.log('here we are', matchId);
     setSelectedMatchId(matchId);
     setCurrentRightView('message');
   };
@@ -234,7 +235,6 @@ const ExploreHome = () => {
             }}
           ></div>
 
-
           <button
             onClick={() => setActiveViewWithStyle('matches')}
             className={`toggle-button absolute w-1/2 top-0.5 ${
@@ -290,7 +290,10 @@ const ExploreHome = () => {
         {currentRightView === 'matchDetail' ? (
           <div>
             <MatchDetail matchId={selectedMatchId} />
-            <div className='message-button' onClick={() => handleMessageClick(selectedMatchId)}>
+            <div
+              className='message-button'
+              onClick={() => handleMessageClick(selectedMatchId)}
+            >
               <h4>Message</h4>
               <Icon
                 className='message-icon'
@@ -400,7 +403,39 @@ const ExploreHome = () => {
             </div>
           </div>
         ) : (
-          <div id='explore-end'>No more users to explore</div>
+          <div
+            id='explore-end'
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'relative', // Makes this a reference for absolute positioning of children
+              width: '300px', // Set the width to match the image
+              height: '300px', // Set the height to match the image
+            }}
+          >
+            <img
+              src={whiteRing}
+              style={{
+                width: '100%', // Makes the image fill the container
+                height: '100%', // Makes the image fill the container
+                background: 'none',
+              }}
+              alt=''
+            />
+            <div
+              style={{
+                position: 'absolute', // Positions this div over the image
+                textAlign: 'center', // Centers the text horizontally
+                width: '70%', // Ensures the text container matches the parent's width
+                top: '50%', // Positions the top of the text container at the center of the parent
+                transform: 'translateY(-50%)',
+                background: 'none', // Shifts the text container up by half its height to center vertically
+              }}
+            >
+              No more users to explore
+            </div>
+          </div>
         )}
       </div>
     </div>
