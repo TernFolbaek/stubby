@@ -409,28 +409,28 @@ const ExploreHome = () => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              position: 'relative', // Makes this a reference for absolute positioning of children
-              width: '300px', // Set the width to match the image
-              height: '300px', // Set the height to match the image
+              position: 'relative', 
+              width: '300px', 
+              height: '300px',
             }}
           >
             <img
               src={whiteRing}
               style={{
-                width: '100%', // Makes the image fill the container
-                height: '100%', // Makes the image fill the container
+                width: '100%', 
+                height: '100%', 
                 background: 'none',
               }}
               alt=''
             />
             <div
               style={{
-                position: 'absolute', // Positions this div over the image
-                textAlign: 'center', // Centers the text horizontally
-                width: '70%', // Ensures the text container matches the parent's width
-                top: '50%', // Positions the top of the text container at the center of the parent
+                position: 'absolute', 
+                textAlign: 'center', 
+                width: '70%', 
+                top: '50%', 
                 transform: 'translateY(-50%)',
-                background: 'none', // Shifts the text container up by half its height to center vertically
+                background: 'none', 
               }}
             >
               No more users to explore
