@@ -1,7 +1,7 @@
 # Use a specific version of Node.js based on the ARG value, using the Alpine Linux version for a smaller image size
 ARG NODE_VERSION=18.16.0
 FROM --platform=linux/amd64 node:${NODE_VERSION}-alpine
-
+#add image to from
 # Set the working directory inside the Docker image for the application
 WORKDIR /app
 
